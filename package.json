@@ -4,7 +4,7 @@
   "description": "React hook for local-storage",
   "main": "index.js",
   "repository": "https://github.com/rehooks/local-storage",
-  "author": "LocalStorage",
+  "author": "Amit Solanki <amit.fash@gmail.com>",
   "license": "MIT",
   "publishConfig": {
     "access": "public"

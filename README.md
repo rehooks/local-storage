@@ -19,7 +19,7 @@ yarn add @rehooks/local-storage
 import useLocalStorage from "@rehooks/local-storage";
 
 function MyComponent() {
-  let name = useLocalStorage("Jamie");
+  let name = useLocalStorage("name"); // send the key to be tracked.
   return (
     <div>
       <h1>{name}</h1>
