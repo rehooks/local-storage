@@ -2,13 +2,23 @@
 let { useState, useEffect } = require("react");
 
 function useLocalStorage(key) {
-  let localStorageItem;
-  if (key) {
-    localStorageItem = localStorage[key];
-  }
-  const [localState, updateLocalState] = useState(localStorageItem);
+  const [localState, updateLocalState] = useState(null);
+
+  useEffect(() => {
+    if (key && localStorage.hasOwnProperty(key)) {
+      let value = localStorage.getItem(key)
+
+      // parse the localStorage string and setState
+      try {
+        value = JSON.parse(value)
+      } finally {
+        updateLocalState(value)
+      }
+    }
+  }, [])
+
   function syncLocalStorage(event) {
-    if (event.key === key) {
+    if (event.key === key && event.isTrusted) {
       updateLocalState(event.newValue);
     }
   }
