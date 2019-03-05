@@ -8,7 +8,6 @@ function useLocalStorage(key) {
   }
   const [localState, updateLocalState] = useState(localStorageItem);
   function syncLocalStorage(event) {
-    console.log('event: ', event);
     if (event.key === key) {
       updateLocalState(event.newValue);
     }
