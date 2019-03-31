@@ -1,5 +1,2 @@
-interface LocalStorage {
-  // LocalStorage
-}
 
-declare export default function useLocalStorage(): LocalStorage;
+declare export default function useLocalStorage(key: string): string;

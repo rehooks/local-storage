@@ -4,14 +4,22 @@
 
 ## Install
 
+### With Yarn
+
 ```sh
 yarn add @rehooks/local-storage
+```
+
+### With NPM
+
+```sh
+npm i @rehooks/local-storage
 ```
 
 ## Usage
 
 ```js
-import useLocalStorage from "@rehooks/local-storage";
+import { useLocalStorage } from "@rehooks/local-storage";
 
 function MyComponent() {
   let name = useLocalStorage("name"); // send the key to be tracked.

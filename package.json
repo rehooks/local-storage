@@ -2,9 +2,21 @@
   "name": "@rehooks/local-storage",
   "version": "1.0.3",
   "description": "React hook for local-storage",
-  "main": "index.js",
-  "repository": "https://github.com/rehooks/local-storage",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "build:types": "tsc --emitDeclarationOnly",
+    "test": "jest test",
+    "example": "npm run build && parcel example/example.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rehooks/local-storage.git"
+  },
   "author": "Amit Solanki <amit.fash@gmail.com>",
+  "contributors": [
+    "Joseph Harrison-Lim"
+  ],
   "license": "MIT",
   "publishConfig": {
     "access": "public"
@@ -16,26 +28,25 @@
     "sync"
   ],
   "files": [
-    "index.*"
+    "index.*",
+    "LICENSE"
   ],
-  "scripts": {
-    "test": "ava test.js",
-    "example": "parcel example.html"
-  },
   "dependencies": {
-    "react": "^16.8.3"
+    "react": "^16.8.6"
   },
   "devDependencies": {
-    "ava": "^0.25.0",
-    "browser-env": "^3.2.5",
-    "parcel": "^1.10.3",
-    "raf": "^3.4.0",
-    "react-dom": "^16.8.3",
-    "react-test-renderer": "^16.8.3"
-  },
-  "ava": {
-    "require": [
-      "./test-setup.js"
-    ]
+    "@babel/preset-env": "^7.4.2",
+    "@babel/preset-typescript": "^7.3.3",
+    "@types/jest": "^24.0.11",
+    "@types/react": "^16.8.10",
+    "babel-jest": "^24.5.0",
+    "browser-env": "^3.2.6",
+    "jest": "^24.5.0",
+    "parcel": "^1.12.3",
+    "react-dom": "^16.8.6",
+    "react-hooks-testing-library": "^0.3.8",
+    "react-testing-library": "^6.0.3",
+    "ts-jest": "^24.0.1",
+    "typescript": "^3.4.1"
   }
 }
