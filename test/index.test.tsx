@@ -1,6 +1,6 @@
 import React from 'react';
-import { useLocalStorage } from '../src';
-import { renderHook, cleanup, act } from 'react-hooks-testing-library';
+import { useLocalStorage, writeStorage } from '../src';
+import { renderHook, cleanup } from 'react-hooks-testing-library';
 import { render, fireEvent } from 'react-testing-library';
 
 
@@ -17,7 +17,7 @@ test('Component can access localStorage value', () => {
   const { result } = renderHook(() => useLocalStorage(key));
   
   expect(localStorage.getItem(key)).toBe(expectedValue);
-  expect(result.current).toBe(expectedValue);
+  expect(result.current[0]).toBe(expectedValue);
 });
 
 
@@ -29,19 +29,19 @@ test('Component should rerender from change to local storage', () => {
   const testButtonId = 'tbid';
 
   const Component = () => {
-    const actualValue = useLocalStorage(key);
+    const [actualValue] = useLocalStorage(key);
     return (
       <span data-testid={testComponentId}>{actualValue}</span>
     );
   };  
   const TestButton = () => (
     <button 
-      onClick={_ => localStorage.setItem(key, newValue)}
+      onClick={_ => writeStorage(key, newValue)}
       data-testid={testButtonId}
     >Test Button</button>
   );
 
-  localStorage.setItem(key, initialValue);
+  writeStorage(key, initialValue);
 
   const testComponent = render(<Component />);
   const testButton = render(<TestButton />);
