@@ -2,3 +2,7 @@ node_modules
 *.log
 dist
 .cache
+lib
+index.*
+!src/*
+!test/*

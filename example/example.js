@@ -1,8 +1,8 @@
 import React from "react";
 import { render } from "react-dom";
-import useLocalStorage from "./";
+import { useLocalStorage } from "../";
 
-function App() {
+const App = () => {
   let name = useLocalStorage("name");
   return (
     <div>
@@ -11,4 +11,4 @@ function App() {
   );
 }
 
-render(<App />, window.root);
+render(<App />, document.getElementById('root'));
