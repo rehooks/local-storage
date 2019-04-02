@@ -6,6 +6,7 @@
   "scripts": {
     "build": "tsc",
     "build:types": "tsc --emitDeclarationOnly",
+    "documentation": "typedoc",
     "test": "jest test",
     "example": "npm run build && parcel example/example.html"
   },
@@ -47,6 +48,7 @@
     "react-hooks-testing-library": "^0.3.8",
     "react-testing-library": "^6.0.3",
     "ts-jest": "^24.0.1",
+    "typedoc": "^0.14.2",
     "typescript": "^3.4.1"
   }
 }
