@@ -1,7 +1,7 @@
 import React from 'react';
-import { useLocalStorage, writeStorage } from '../src';
+import { useLocalStorage, writeStorage, deleteFromStorage } from '../src';
 import { renderHook, cleanup } from 'react-hooks-testing-library';
-import { render, fireEvent } from 'react-testing-library';
+import { render, fireEvent, act } from 'react-testing-library';
 
 
 afterEach(() => {
@@ -93,4 +93,34 @@ test('Hooks use valid types', () => {
   fireEvent.click(testComponent.getByTestId(buttonId));
 
   expect(testComponent.getByTestId(fooId).textContent).toBe(newFooName);
+});
+
+
+test('deleteFromStorage removes item from localStorage', () => {
+  const key = 'glarp';
+  const value = 'glorp';
+  localStorage.setItem(key, value);
+  deleteFromStorage(key);
+
+  expect(localStorage.getItem(key)).toBe(null);
+});
+
+
+test('deleteFromStorage to trigger update on component', () => {
+  const key = 'floot';
+  const initialValue = 'larg';
+  const testComponentId = 'someId';
+
+  writeStorage(key, initialValue);
+  const TestComponent = () => {
+    const [value] = useLocalStorage(key);
+    return (
+      <p data-testid={testComponentId}>{value}</p>
+    );
+  }
+  const testComponent = render(<TestComponent />);
+  act(() => deleteFromStorage(key));
+
+  expect(testComponent.getByTestId(testComponentId).textContent).toBe("");
+  expect(localStorage.getItem(key)).toBe(null);
 });

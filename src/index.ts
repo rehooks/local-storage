@@ -37,6 +37,28 @@ export function writeStorage(key: string, value: string) {
 
 
 /**
+ * Use this function to delete a value from localStorage.
+ *
+ * @example
+ * ```js
+ * const user = { name: 'John', email: 'John@fakemail.com' };
+ * 
+ * // Add a user to your localStorage
+ * writeStorage('user', JSON.stringify(user));
+ * 
+ * // This will also trigger an update to the state of your component
+ * deleteFromStorage('user');
+ * ```
+ * 
+ * @export
+ * @param {string} key The key of the item you wish to delete from localStorage.
+ */
+export function deleteFromStorage(key: string) {
+  localStorage.removeItem(key);
+  window.dispatchEvent(new LocalStorageChanged({ key, value: '' }))
+}
+
+/**
  * React hook to enable updates to state via localStorage.
  * This updates when the {writeStorage} function is used, when the returned function
  * is called, or when the "storage" event is fired from another tab in the browser.
