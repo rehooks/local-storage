@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Dispatch } from 'react';
 
 
 interface KVP<K, V> {
@@ -56,7 +56,7 @@ export function writeStorage(key: string, value: string) {
  * @returns An array containing the value associated with the key in position 0,
  * and a function to set the value in position 1.
  */
-export function useLocalStorage(key: string) {
+export function useLocalStorage(key: string): [string | null, Dispatch<string>] {
   const [localState, updateLocalState] = useState(localStorage.getItem(key));
 
   function onLocalStorageChange(event: LocalStorageChanged | StorageEvent) {
