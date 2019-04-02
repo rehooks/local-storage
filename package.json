@@ -2,7 +2,8 @@
   "name": "@rehooks/local-storage",
   "version": "1.1.0",
   "description": "React hook for local-storage",
-  "main": "src/index.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
     "build:types": "tsc --emitDeclarationOnly",
@@ -29,7 +30,7 @@
     "sync"
   ],
   "files": [
-    "index.*",
+    "/lib",
     "LICENSE"
   ],
   "dependencies": {
