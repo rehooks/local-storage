@@ -1,7 +1,7 @@
 import React from 'react';
-import { useLocalStorage, writeStorage } from '../src';
+import { useLocalStorage, writeStorage, deleteFromStorage } from '../src';
 import { renderHook, cleanup } from 'react-hooks-testing-library';
-import { render, fireEvent } from 'react-testing-library';
+import { render, fireEvent, act } from 'react-testing-library';
 
 
 afterEach(() => {
@@ -12,10 +12,10 @@ afterEach(() => {
 test('Component can access localStorage value', () => {
   const expectedValue = 'THIS IS SPARTA!';
   const key = 'sparta';
-  
+
   localStorage.setItem(key, expectedValue);
   const { result } = renderHook(() => useLocalStorage(key));
-  
+
   expect(localStorage.getItem(key)).toBe(expectedValue);
   expect(result.current[0]).toBe(expectedValue);
 });
@@ -33,9 +33,9 @@ test('Component should rerender from change to local storage', () => {
     return (
       <span data-testid={testComponentId}>{actualValue}</span>
     );
-  };  
+  };
   const TestButton = () => (
-    <button 
+    <button
       onClick={_ => writeStorage(key, newValue)}
       data-testid={testButtonId}
     >Test Button</button>
@@ -60,4 +60,67 @@ test('Component should rerender from change to local storage', () => {
   ).toBe(newValue);
 });
 
+test('Hooks use valid types', () => {
+  class Foo {
+    constructor(public name: string) { }
+  }
+  const fooId = 'fooP';
+  const fooStorageId = 'foo';
+  const buttonId = 'btn';
+  const fooName = 'floofaloof';
+  const newFooName = 'gloopalop';
 
+  localStorage.setItem(fooStorageId, JSON.stringify(new Foo(fooName)));
+
+  const TestComponent = () => {
+    const [fooString, setFoo] = useLocalStorage(fooStorageId);
+
+    expect(typeof(fooString) === 'string').toBe(true);
+
+    const foo: Foo = JSON.parse(fooString!);
+    return (
+      <>
+        <p data-testid={fooId}>{foo.name}</p>
+        <button data-testid={buttonId} onClick={e => setFoo(JSON.stringify(new Foo(newFooName)))}>Clicky Click</button>
+      </>
+    );
+  }
+
+  const testComponent = render(<TestComponent />);
+
+  expect(testComponent.getByTestId(fooId).textContent).toBe(fooName);
+
+  fireEvent.click(testComponent.getByTestId(buttonId));
+
+  expect(testComponent.getByTestId(fooId).textContent).toBe(newFooName);
+});
+
+
+test('deleteFromStorage removes item from localStorage', () => {
+  const key = 'glarp';
+  const value = 'glorp';
+  localStorage.setItem(key, value);
+  deleteFromStorage(key);
+
+  expect(localStorage.getItem(key)).toBe(null);
+});
+
+
+test('deleteFromStorage to trigger update on component', () => {
+  const key = 'floot';
+  const initialValue = 'larg';
+  const testComponentId = 'someId';
+
+  writeStorage(key, initialValue);
+  const TestComponent = () => {
+    const [value] = useLocalStorage(key);
+    return (
+      <p data-testid={testComponentId}>{value}</p>
+    );
+  }
+  const testComponent = render(<TestComponent />);
+  act(() => deleteFromStorage(key));
+
+  expect(testComponent.getByTestId(testComponentId).textContent).toBe("");
+  expect(localStorage.getItem(key)).toBe(null);
+});
