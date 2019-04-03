@@ -1,3 +1,6 @@
+[![npm version](https://badge.fury.io/js/%40rehooks%2Flocal-storage.svg)](https://www.npmjs.com/package/@rehooks/local-storage)
+
+
 # `@rehooks/local-storage`
 
 > React hook for local-storage
