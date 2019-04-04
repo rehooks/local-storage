@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "build:types": "tsc --emitDeclarationOnly",
-    "documentation": "typedoc",
+    "docs": "typedoc --out docs",
     "test": "jest test",
     "example": "npm run build && parcel example/example.html"
   },
