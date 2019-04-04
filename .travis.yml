@@ -11,7 +11,7 @@ cache:
 script:
   - npm test
 after_success:
-  - npm run typedoc
+  - npm run docs
 deploy:
   - provider: pages
     skip_cleanup: true

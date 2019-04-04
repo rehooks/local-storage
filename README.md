@@ -107,5 +107,5 @@ const App = () => {
 
 // Assuming there is a div in index.html with an ID of 'root'
 ReactDOM.render(<App />, document.getElementById('root'));
-
 ```
+
