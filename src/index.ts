@@ -78,7 +78,7 @@ export function deleteFromStorage(key: string) {
  * @returns An array containing the value associated with the key in position 0,
  * and a function to set the value in position 1.
  */
-export function useLocalStorage(key: string): [string | null, Dispatch<string>] {
+export function useLocalStorage(key: string): [string | null, Dispatch<string>, Dispatch<void>] {
   const [localState, updateLocalState] = useState(localStorage.getItem(key));
 
   function onLocalStorageChange(event: LocalStorageChanged | StorageEvent) {
@@ -109,7 +109,7 @@ export function useLocalStorage(key: string): [string | null, Dispatch<string>] 
     };
   }, []);
 
-  return [localState, (value: string) => writeStorage(key, value)];
+  return [localState, (value: string) => writeStorage(key, value), () => deleteFromStorage(key)];
 }
 
 export default useLocalStorage;
