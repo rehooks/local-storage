@@ -67,21 +67,24 @@ test('Hooks use valid types', () => {
   const fooId = 'fooP';
   const fooStorageId = 'foo';
   const buttonId = 'btn';
+  const buttonDelId = 'btnDel';
   const fooName = 'floofaloof';
   const newFooName = 'gloopalop';
 
   localStorage.setItem(fooStorageId, JSON.stringify(new Foo(fooName)));
 
   const TestComponent = () => {
-    const [fooString, setFoo] = useLocalStorage(fooStorageId);
+    const [fooString, setFoo, deleteFoo] = useLocalStorage(fooStorageId);
 
     expect(typeof(fooString) === 'string').toBe(true);
 
-    const foo: Foo = JSON.parse(fooString!);
+    const fooName = fooString ? (JSON.parse(fooString!) as Foo).name : '';
+
     return (
       <>
-        <p data-testid={fooId}>{foo.name}</p>
+        <p data-testid={fooId}>{fooName}</p>
         <button data-testid={buttonId} onClick={e => setFoo(JSON.stringify(new Foo(newFooName)))}>Clicky Click</button>
+        <button data-testid={buttonDelId} onClick={e => deleteFoo()}>Delete Delete</button>
       </>
     );
   }
@@ -93,6 +96,10 @@ test('Hooks use valid types', () => {
   fireEvent.click(testComponent.getByTestId(buttonId));
 
   expect(testComponent.getByTestId(fooId).textContent).toBe(newFooName);
+
+  fireEvent.click(testComponent.getByTestId(buttonDelId));
+
+  expect(testComponent.getByTestId(fooId).textContent).toBe("");
 });
 
 
