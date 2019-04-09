@@ -119,7 +119,7 @@ const IncrememterWithButtons = () => {
 
   return (
     <Fragment>
-      <p>{typeof(getNum) === 'number' ? number : 'Try incrementing the number!'}</p>
+      <p>{typeof(number) === 'number' ? number : 'Try incrementing the number!'}</p>
       <button onClick={_ => setNum(getNum !== null ? +(number) + 1 : startingNum)}>Increment</button>
       <button onClick={deleteNum}>Delete</button>
     </Fragment>
