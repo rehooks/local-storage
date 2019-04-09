@@ -1,9 +1,8 @@
-[![npm version](https://badge.fury.io/js/%40rehooks%2Flocal-storage.svg)](https://www.npmjs.com/package/@rehooks/local-storage)
-
-
 # `@rehooks/local-storage`
 
-> React hook for local-storage
+> React hook for enabling synchronization with local-storage.
+
+[![npm version](https://badge.fury.io/js/%40rehooks%2Flocal-storage.svg)](https://www.npmjs.com/package/@rehooks/local-storage)
 
 ## Table of Contents
 
@@ -38,7 +37,7 @@ npm i @rehooks/local-storage
 
 This can be anywhere from within your application.
 
-```js
+```jsx
 import React from 'react';
 import { writeStorage } from '@rehooks/local-storage';
 
@@ -56,7 +55,7 @@ const MyButton = () => (
 
 This component will receive updates to itself from local storage.
 
-```js
+```jsx
 import React from 'react';
 import { useLocalStorage } from '@rehooks/local-storage';
 
@@ -86,26 +85,55 @@ const thisIsNull = localStorage.getItem('name'); // This is indeed null
 
 ## Full Example
 
-```js
+You may view this example [here on StackBlitz.](https://stackblitz.com/edit/react-vbrkjb?embed=1&file=index.js)
+
+> Note: The writeStorage and deleteFromStorage functions are provided from useLocalStorage as well,
+> and do not require you to specify the key when using them.
+
+```jsx
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import { writeStorage, deleteFromStorage, useLocalStorage } from '@rehooks/local-storage';
 
 const startingNum = 0;
 
-const App = () => {
-  const [getNum, setNum] = useLocalStorage('num');
+const Clicker = () => (
+  <>
+    <h4>Clicker</h4>
+    <button onClick={_ => {
+      writeStorage('num', localStorage.getItem('num')
+      ? +(localStorage.getItem('num')) + 1
+      : startingNum
+      )
+    }}>
+      Increment From Outside
+    </button>
+    <button onClick={_ => deleteFromStorage('num')}>
+      Delete From Outside
+    </button>
+  </>
+);
+
+const IncrememterWithButtons = () => {
+  const [getNum, setNum, deleteNum] = useLocalStorage('num');
 
   return (
     <>
-      <p>{getNum}</p>
-      <button onClick={_ => setNum(getNum ? getNum + 1 : 0)}>Increment</button>
-      <button onClick={_ => deleteFromStorage('num')}>Delete</button>
+      <p>{typeof(getNum) === 'number' ? getNum : 'Try incrementing the number!'}</p>
+      <button onClick={_ => setNum(getNum !== null ? +(getNum) + 1 : startingNum)}>Increment</button>
+      <button onClick={_ => deleteNum()}>Delete</button>
     </>
   );
 };
 
-// Assuming there is a div in index.html with an ID of 'root'
-ReactDOM.render(<App />, document.getElementById('root'));
-```
+const App = () => (
+  <>
+  <h1> Demo </h1>
+  <IncrememterWithButtons />
+  <Clicker />
+  </>
+);
 
+// Assuming there is a div in index.html with an ID of 'root'
+render(<App />, document.getElementById('root'));
+```
