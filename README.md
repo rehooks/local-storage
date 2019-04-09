@@ -91,14 +91,14 @@ You may view this example [here on StackBlitz.](https://stackblitz.com/edit/reac
 > and do not require you to specify the key when using them.
 
 ```jsx
-import React from 'react';
+import React, { Fragment } from 'react';
 import { render } from 'react-dom';
 import { writeStorage, deleteFromStorage, useLocalStorage } from '@rehooks/local-storage';
 
 const startingNum = 0;
 
 const Clicker = () => (
-  <>
+  <Fragment>
     <h4>Clicker</h4>
     <button onClick={_ => {
       writeStorage('num', localStorage.getItem('num')
@@ -111,27 +111,27 @@ const Clicker = () => (
     <button onClick={_ => deleteFromStorage('num')}>
       Delete From Outside
     </button>
-  </>
+  </Fragment>
 );
 
 const IncrememterWithButtons = () => {
-  const [getNum, setNum, deleteNum] = useLocalStorage('num');
+  const [number, setNum, deleteNum] = useLocalStorage('num');
 
   return (
-    <>
-      <p>{typeof(getNum) === 'number' ? getNum : 'Try incrementing the number!'}</p>
-      <button onClick={_ => setNum(getNum !== null ? +(getNum) + 1 : startingNum)}>Increment</button>
-      <button onClick={_ => deleteNum()}>Delete</button>
-    </>
+    <Fragment>
+      <p>{typeof(getNum) === 'number' ? number : 'Try incrementing the number!'}</p>
+      <button onClick={_ => setNum(getNum !== null ? +(number) + 1 : startingNum)}>Increment</button>
+      <button onClick={deleteNum}>Delete</button>
+    </Fragment>
   );
 };
 
 const App = () => (
-  <>
-  <h1> Demo </h1>
-  <IncrememterWithButtons />
-  <Clicker />
-  </>
+  <Fragment>
+    <h1> Demo </h1>
+    <IncrememterWithButtons />
+    <Clicker />
+  </Fragment>
 );
 
 // Assuming there is a div in index.html with an ID of 'root'
