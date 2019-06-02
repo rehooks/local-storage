@@ -8,7 +8,7 @@
     "build": "tsc",
     "build:types": "tsc --emitDeclarationOnly",
     "docs": "typedoc --out docs",
-    "test": "jest test",
+    "test": "jest --verbose",
     "example": "npm run build && parcel example/example.html"
   },
   "repository": {
