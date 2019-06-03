@@ -1,17 +1,20 @@
+/**
+ * @type {jest.ProjectConfig}
+ */
 module.exports = {
-    // "rootDir": [
-    //   "<rootDir>/"
-    // ],
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    // "testRegex": "((\\.|/)(test|spec))\\.tsx?$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ],
-  }
+
+  roots: [
+    '<rootDir>/test'
+  ],
+  transform: {
+    '^.+\\.tsx?$': 'ts-jest'
+  },
+  moduleFileExtensions: [
+    'ts',
+    'tsx',
+    'js',
+    'jsx',
+    'json',
+    'node'
+  ]
+}
