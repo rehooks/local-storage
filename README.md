@@ -14,6 +14,7 @@
   - [Usage](#usage)
     - [Write to Storage](#write-to-storage)
     - [Read From Storage](#read-from-storage)
+      - [Optionally use a default value:](#optionally-use-a-default-value)
     - [Delete From Storage](#delete-from-storage)
   - [Full Example](#full-example)
 
@@ -61,6 +62,23 @@ import { useLocalStorage } from '@rehooks/local-storage';
 
 function MyComponent() {
   const [counterValue] = useLocalStorage('i'); // send the key to be tracked.
+  return (
+    <div>
+      <h1>{counterValue}</h1>
+    </div>
+  );
+}
+```
+
+#### Optionally use a default value:
+
+```jsx
+import React from 'react';
+import { useLocalStorage } from '@rehooks/local-storage';
+
+function MyComponent() {
+  // hook with default value of 'Anakin Skywalker'
+  const [counterValue] = useLocalStorage('username', 'Anakin Skywalker');
   return (
     <div>
       <h1>{counterValue}</h1>
