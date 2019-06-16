@@ -1,5 +1,5 @@
 import { writeStorage, deleteFromStorage, LocalStorageChanged } from './local-storage-events';
-import { useEffect, useState, Dispatch } from 'react';
+import { useEffect, useState, Dispatch, useCallback } from 'react';
 
 /**
  * React hook to enable updates to state via localStorage.
@@ -24,7 +24,7 @@ import { useEffect, useState, Dispatch } from 'react';
 export function useLocalStorage(key: string, initialValue?: string): [string | null, Dispatch<string>, Dispatch<void>] {
   const [localState, updateLocalState] = useState(localStorage.getItem(key));
 
-  function onLocalStorageChange(event: LocalStorageChanged | StorageEvent) {
+  const onLocalStorageChange = useCallback((event: LocalStorageChanged | StorageEvent) => {
     if (event instanceof LocalStorageChanged) {
       if (event.detail.key === key) {
         updateLocalState(event.detail.value);
@@ -34,7 +34,8 @@ export function useLocalStorage(key: string, initialValue?: string): [string | n
         updateLocalState(event.newValue);
       }
     }
-  }
+  }, []);
+
 
   useEffect(() => {
     // The custom storage event allows us to update our component 

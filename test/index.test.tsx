@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocalStorage, writeStorage, deleteFromStorage } from '../src';
-import { renderHook, cleanup } from 'react-hooks-testing-library';
-import { render, fireEvent, act } from 'react-testing-library';
+import { renderHook } from 'react-hooks-testing-library';
+import { render, fireEvent, act, cleanup } from '@testing-library/react';
 
 
 afterEach(() => {

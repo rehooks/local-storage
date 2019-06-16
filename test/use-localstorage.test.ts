@@ -1,4 +1,3 @@
-import React from 'react';
 import { useLocalStorage } from '../src';
 import { renderHook } from 'react-hooks-testing-library';
 
