@@ -13,10 +13,10 @@ interface KVP<K, V> {
  * @class LocalStorageChanged
  * @extends {CustomEvent<KVP<string, string>>}
  */
-export class LocalStorageChanged extends CustomEvent<KVP<string, string>> {
+export class LocalStorageChanged<TValue> extends CustomEvent<KVP<string, TValue>> {
     static eventName = 'onLocalStorageChange';
 
-    constructor(payload: KVP<string, string>) {
+    constructor(payload: KVP<string, TValue>) {
         super(LocalStorageChanged.eventName, { detail: payload });
     }
 }
@@ -36,9 +36,20 @@ export class LocalStorageChanged extends CustomEvent<KVP<string, string>> {
  * @param {string} key The key to write to in the localStorage.
  * @param {string} value The value to write to in the localStorage.
  */
-export function writeStorage(key: string, value: string) {
-    localStorage.setItem(key, value);
-    window.dispatchEvent(new LocalStorageChanged({ key, value }));
+export function writeStorage<TValue>(key: string, value: TValue) {
+    try {
+        localStorage.setItem(key, typeof value === 'object' ? JSON.stringify(value) : `${value}`);
+        window.dispatchEvent(new LocalStorageChanged({ key, value }));
+    } catch(err) {
+        if (err instanceof TypeError && err.message.includes('circular structure')) {
+            throw new TypeError(
+                'The object that was given to the writeStorage function has circular references.\n' +
+                'For more information, check here: ' + 
+                'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Cyclic_object_value'
+            );
+        }
+        throw err;
+    }
 }
 
 
