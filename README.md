@@ -4,6 +4,8 @@
 
 [![npm version](https://badge.fury.io/js/%40rehooks%2Flocal-storage.svg)](https://www.npmjs.com/package/@rehooks/local-storage)
 
+API Docs can be found [here](https://rehooks.github.io/local-storage).
+
 ## Table of Contents
 
 - [`@rehooks/local-storage`](#rehookslocal-storage)
