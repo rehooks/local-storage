@@ -40,6 +40,9 @@ npm i @rehooks/local-storage
 
 This can be anywhere from within your application.
 
+> Note: Objects that are passed to writeStorage are automatically stringified.
+> This will not work for circular structures.
+
 ```jsx
 import React from 'react';
 import { writeStorage } from '@rehooks/local-storage';
@@ -92,7 +95,8 @@ function MyComponent() {
 
 #### Optionally use a default value
 
-__Javascript__:
+> Note: Objects that are passed to useLocalStorage's default parameter will be automatically
+> stringified. This will not work for circular structures.
 
 ```jsx
 import React from 'react';
