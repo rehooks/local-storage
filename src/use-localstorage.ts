@@ -29,7 +29,7 @@ function tryParse(value: string) {
  * @returns An array containing the value associated with the key in position 0,
  * and a function to set the value in position 1.
  */
-export function useLocalStorage<TValue = {}>(key: string, initialValue?: TValue): [TValue | null, Dispatch<TValue>, Dispatch<void>] {
+export function useLocalStorage<TValue = string>(key: string, initialValue?: TValue): [TValue | null, Dispatch<TValue>, Dispatch<void>] {
   const [localState, updateLocalState] = useState(tryParse(localStorage.getItem(key)!));
 
   const onLocalStorageChange = useCallback((event: LocalStorageChanged<TValue> | StorageEvent) => {
