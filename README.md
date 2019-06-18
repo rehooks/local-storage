@@ -7,16 +7,16 @@
 ## Table of Contents
 
 - [`@rehooks/local-storage`](#rehookslocal-storage)
-  - [Table of Contents](#table-of-contents)
-  - [Install](#install)
-    - [With Yarn](#with-yarn)
-    - [With NPM](#with-npm)
-  - [Usage](#usage)
-    - [Write to Storage](#write-to-storage)
-    - [Read From Storage](#read-from-storage)
-      - [Optionally use a default value:](#optionally-use-a-default-value)
-    - [Delete From Storage](#delete-from-storage)
-  - [Full Example](#full-example)
+  - [Table of Contents](#Table-of-Contents)
+  - [Install](#Install)
+    - [With Yarn](#With-Yarn)
+    - [With NPM](#With-NPM)
+  - [Usage](#Usage)
+    - [Write to Storage](#Write-to-Storage)
+    - [Read From Storage](#Read-From-Storage)
+      - [Optionally use a default value](#Optionally-use-a-default-value)
+    - [Delete From Storage](#Delete-From-Storage)
+  - [Full Example](#Full-Example)
 
 ## Install
 
@@ -56,6 +56,8 @@ const MyButton = () => (
 
 This component will receive updates to itself from local storage.
 
+__Javascript__:
+
 ```jsx
 import React from 'react';
 import { useLocalStorage } from '@rehooks/local-storage';
@@ -70,18 +72,36 @@ function MyComponent() {
 }
 ```
 
-#### Optionally use a default value:
+__Typescript__:
+
+```tsx
+import React from 'react';
+import { useLocalStorage } from '@rehooks/local-storage';
+
+function MyComponent() {
+  const [counterValue] = useLocalStorage<number>('i'); // specify a type argument for your type
+  return (
+    <div>
+      <h1>{counterValue}</h1>
+    </div>
+  );
+}
+```
+
+#### Optionally use a default value
+
+__Javascript__:
 
 ```jsx
 import React from 'react';
 import { useLocalStorage } from '@rehooks/local-storage';
 
 function MyComponent() {
-  // hook with default value of 'Anakin Skywalker'
-  const [counterValue] = useLocalStorage('username', 'Anakin Skywalker');
+  // Note: The type of user can be inferred from the default value type
+  const [user] = useLocalStorage('user', { name: 'Anakin Skywalker' });
   return (
     <div>
-      <h1>{counterValue}</h1>
+      <h1>{user.name}</h1>
     </div>
   );
 }
