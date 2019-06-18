@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "build:types": "tsc --emitDeclarationOnly",
-    "docs": "typedoc --out docs && touch docs/.nojekyll",
+    "docs": "typedoc --out docs src && touch docs/.nojekyll",
     "test": "jest --verbose",
     "example": "npm run build && parcel example/example.html"
   },
