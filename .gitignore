@@ -1,7 +1,6 @@
 node_modules
 *.log
 dist
-docs
 .cache
 lib
 index.*

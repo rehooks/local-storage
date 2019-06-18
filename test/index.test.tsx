@@ -75,16 +75,12 @@ describe('Integration Tests', () => {
     localStorage.setItem(fooStorageId, JSON.stringify(new Foo(fooName)));
 
     const TestComponent = () => {
-      const [fooString, setFoo, deleteFoo] = useLocalStorage(fooStorageId);
-
-      expect(typeof (fooString) === 'string').toBe(true);
-
-      const fooName = fooString ? (JSON.parse(fooString!) as Foo).name : '';
+      const [foo, setFoo, deleteFoo] = useLocalStorage<Foo>(fooStorageId);
 
       return (
         <>
-          <p data-testid={fooId}>{fooName}</p>
-          <button data-testid={buttonId} onClick={e => setFoo(JSON.stringify(new Foo(newFooName)))}>Clicky Click</button>
+          <p data-testid={fooId}>{foo!.name}</p>
+          <button data-testid={buttonId} onClick={e => setFoo(new Foo(newFooName))}>Clicky Click</button>
           <button data-testid={buttonDelId} onClick={e => deleteFoo()}>Delete Delete</button>
         </>
       );
