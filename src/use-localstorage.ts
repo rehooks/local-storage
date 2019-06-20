@@ -1,4 +1,3 @@
-import { writeStorage, deleteFromStorage, LocalStorageChanged } from './local-storage-events';
 import { useEffect, useState, Dispatch, useCallback } from 'react';
 
 /**
@@ -21,44 +20,54 @@ import { useEffect, useState, Dispatch, useCallback } from 'react';
  * @returns An array containing the value associated with the key in position 0,
  * and a function to set the value in position 1.
  */
-export function useLocalStorage(key: string, initialValue?: string): [string | null, Dispatch<string>, Dispatch<void>] {
-  const [localState, updateLocalState] = useState(localStorage.getItem(key));
+export let useLocalStorage: (key: string, initialValue?: string) => [string | null, Dispatch<string>, Dispatch<void>];
 
-  const onLocalStorageChange = useCallback((event: LocalStorageChanged | StorageEvent) => {
-    if (event instanceof LocalStorageChanged) {
-      if (event.detail.key === key) {
-        updateLocalState(event.detail.value);
-      }
-    } else {
-      if (event.key === key) {
-        updateLocalState(event.newValue);
-      }
-    }
-  }, []);
+if (typeof window !== 'undefined') {
+  type FakeEvent = { key: string, newValue: any };
 
+  import('./local-storage-events').then(({ LocalStorageChanged, deleteFromStorage, writeStorage }) => {
+    useLocalStorage = (key: string, initialValue?: string): [string | null, Dispatch<string>, Dispatch<void>] => {
+      const [localState, updateLocalState] = useState(localStorage.getItem(key));
 
-  useEffect(() => {
-    // The custom storage event allows us to update our component 
-    // when a change occurs in localStorage outside of our component
-    window.addEventListener(
-      LocalStorageChanged.eventName,
-      (e: any) => onLocalStorageChange(e as LocalStorageChanged)
-    );
+      const onLocalStorageChange = useCallback((event: FakeEvent | StorageEvent) => {
+        if (event instanceof LocalStorageChanged) {
+          if (event.detail.key === key) {
+            updateLocalState(event.detail.value);
+          }
+        } else {
+          if (event.key === key) {
+            updateLocalState(event.newValue);
+          }
+        }
+      }, []);
 
-    // The storage event only works in the context of other documents (eg. other browser tabs)
-    window.addEventListener('storage', e => onLocalStorageChange(e));
+      LocalStorageChanged
+      useEffect(() => {
+        // The custom storage event allows us to update our component 
+        // when a change occurs in localStorage outside of our component
+        window.addEventListener(
+          LocalStorageChanged.eventName,
+          (e: any) => onLocalStorageChange(e as FakeEvent)
+        );
 
-    if(initialValue)
-      writeStorage(key, initialValue);
+        // The storage event only works in the context of other documents (eg. other browser tabs)
+        window.addEventListener('storage', e => onLocalStorageChange(e));
 
-    return () => {
-      window.removeEventListener(
-        LocalStorageChanged.eventName,
-        (e: any) => onLocalStorageChange(e as LocalStorageChanged)
-      );
-      window.removeEventListener('storage', e => onLocalStorageChange(e));
+        if (initialValue)
+          writeStorage(key, initialValue);
+
+        return () => {
+          window.removeEventListener(
+            LocalStorageChanged.eventName,
+            (e: any) => onLocalStorageChange(e as FakeEvent)
+          );
+          window.removeEventListener('storage', e => onLocalStorageChange(e));
+        };
+      }, []);
+
+      return [localState, (value: string) => writeStorage(key, value), () => deleteFromStorage(key)];
     };
-  }, []);
 
-  return [localState, (value: string) => writeStorage(key, value), () => deleteFromStorage(key)];
+  });
 }
+
