@@ -37,7 +37,7 @@ export function useLocalStorage<TValue = string>(key: string, initialValue?: TVa
   const [localState, updateLocalState] = useState(tryParse(localStorage.getItem(key)!));
 
   const onLocalStorageChange = useCallback((event: LocalStorageChanged<TValue> | StorageEvent) => {
-    if (event instanceof LocalStorageChanged) {
+    if (event.type === LocalStorageChanged.eventName) {
       if (event.detail.key === key) {
         updateLocalState(event.detail.value);
       }
