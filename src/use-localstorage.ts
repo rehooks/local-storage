@@ -46,7 +46,7 @@ export function useLocalStorage<TValue = string>(key: string, initialValue?: TVa
         updateLocalState(event.newValue);
       }
     }
-  }, []);
+  }, []) as EventListener;
 
 
   useEffect(() => {
