@@ -46,8 +46,7 @@ export function useLocalStorage<TValue = string>(key: string, initialValue?: TVa
         updateLocalState(event.newValue);
       }
     }
-  }, []) as EventListener;
-
+  }, [key]) as EventListener;
 
   useEffect(() => {
     // The custom storage event allows us to update our component 
@@ -64,7 +63,7 @@ export function useLocalStorage<TValue = string>(key: string, initialValue?: TVa
       window.removeEventListener(LocalStorageChanged.eventName, onLocalStorageChange));
       window.removeEventListener('storage', onLocalStorageChange);
     };
-  }, []);
+  }, [initialValue, key, onLocalStorageChange]);
 
   return [localState, (value: TValue) => writeStorage(key, value), () => deleteFromStorage(key)];
 }
