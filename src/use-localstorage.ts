@@ -43,7 +43,9 @@ export function useLocalStorage<TValue = string>(key: string, initialValue?: TVa
       }
     } else {
       if (event.key === key) {
-        updateLocalState(event.newValue);
+        if (event.newValue) {
+          updateLocalState(tryParse(event.newValue));
+        }
       }
     }
   }, []);
