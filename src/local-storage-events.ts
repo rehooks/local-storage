@@ -21,6 +21,17 @@ export class LocalStorageChanged<TValue> extends CustomEvent<KVP<string, TValue>
     }
 }
 
+/**
+ * Checks if the event that is passed in is the same type as LocalStorageChanged.
+ *
+ * @export
+ * @template TValue
+ * @param {*} evt the object you wish to assert as a LocalStorageChanged event.
+ * @returns {evt is LocalStorageChanged<TValue>} if true, evt is asserted to be LocalStorageChanged.
+ */
+export function isTypeOfLocalStorageChanged<TValue>(evt: any): evt is LocalStorageChanged<TValue> {
+    return (!!evt) && (evt instanceof LocalStorageChanged || (evt.detail && evt.type === LocalStorageChanged.eventName));
+}
 
 /**
  * Use this instead of directly using localStorage.setItem
@@ -40,11 +51,11 @@ export function writeStorage<TValue>(key: string, value: TValue) {
     try {
         localStorage.setItem(key, typeof value === 'object' ? JSON.stringify(value) : `${value}`);
         window.dispatchEvent(new LocalStorageChanged({ key, value }));
-    } catch(err) {
+    } catch (err) {
         if (err instanceof TypeError && err.message.includes('circular structure')) {
             throw new TypeError(
                 'The object that was given to the writeStorage function has circular references.\n' +
-                'For more information, check here: ' + 
+                'For more information, check here: ' +
                 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Cyclic_object_value'
             );
         }

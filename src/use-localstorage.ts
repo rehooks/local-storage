@@ -1,4 +1,4 @@
-import { writeStorage, deleteFromStorage, LocalStorageChanged } from './local-storage-events';
+import { writeStorage, deleteFromStorage, LocalStorageChanged, isTypeOfLocalStorageChanged } from './local-storage-events';
 import { useEffect, useState, Dispatch, useCallback } from 'react';
 
 function tryParse(value: string) {
@@ -33,11 +33,11 @@ function tryParse(value: string) {
  * associated with the key in position 0, a function to set the value in position 1,
  * and a function to delete the value from localStorage in position 2.
  */
-export function useLocalStorage<TValue = string>(key: string, initialValue?: TValue): [TValue | null, Dispatch<TValue>, Dispatch<void>]{
+export function useLocalStorage<TValue = string>(key: string, initialValue?: TValue): [TValue | null, Dispatch<TValue>, Dispatch<void>] {
   const [localState, updateLocalState] = useState(tryParse(localStorage.getItem(key)!));
 
   const onLocalStorageChange = useCallback((event: LocalStorageChanged<TValue> | StorageEvent) => {
-    if (event.type === LocalStorageChanged.eventName) {
+    if (isTypeOfLocalStorageChanged(event)) {
       if (event.detail.key === key) {
         updateLocalState(event.detail.value);
       }
