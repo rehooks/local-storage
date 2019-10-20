@@ -63,7 +63,7 @@ export function useLocalStorage<TValue = string>(key: string, initialValue?: TVa
     // Write initial value to the local storage if it's not present or contains invalid JSON data.
     const storedValue = localStorage[key]
     const cantWrite = localStorage.hasOwnProperty(key) && storedValue && tryParse(storedValue) !== storedValue
-    const canWrite = !canWrite
+    const canWrite = !cantWrite
 
     if (initialValue && canWrite) {
       writeStorage(key, initialValue);
