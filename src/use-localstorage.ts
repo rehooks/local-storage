@@ -62,8 +62,14 @@ export function useLocalStorage<TValue = string>(key: string, initialValue?: TVa
     // The storage event only works in the context of other documents (eg. other browser tabs)
     window.addEventListener('storage', e => onLocalStorageChange(e));
 
-    if (initialValue)
+    // We need to check if there is a stored value because we do not wish to overwrite it.
+    const storedValue = localStorage.getItem(key);
+    const canWrite = !(storedValue && tryParse(storedValue) !== storedValue);
+
+    // Write initial value to the local storage if it's not present or contains invalid JSON data.
+    if (initialValue && canWrite) {
       writeStorage(key, initialValue);
+    }
 
     return () => {
       window.removeEventListener(
