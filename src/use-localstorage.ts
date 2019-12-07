@@ -80,9 +80,12 @@ export function useLocalStorage<TValue = string>(key: string, initialValue?: TVa
     };
   }, []);
 
+  const writeState = useCallback((value: TValue) => writeStorage(key, value), []);
+  const deleteState = useCallback(() => deleteFromStorage(key), []);
+
   return [
     localState === null ? initialValue : localState,
-    (value: TValue) => writeStorage(key, value),
-    () => deleteFromStorage(key)
+    writeState,
+    deleteState
   ];
 }
