@@ -76,6 +76,16 @@
         "code",
         "bug"
       ]
+    },
+    {
+      "login": "gmdayley",
+      "name": "Gabriel Dayley",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/647130?v=4",
+      "profile": "https://github.com/gmdayley",
+      "contributions": [
+        "code",
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7
