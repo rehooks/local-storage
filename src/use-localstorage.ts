@@ -80,5 +80,9 @@ export function useLocalStorage<TValue = string>(key: string, initialValue?: TVa
     };
   }, []);
 
-  return [localState, (value: TValue) => writeStorage(key, value), () => deleteFromStorage(key)];
+  return [
+    localState === null ? initialValue : localState,
+    (value: TValue) => writeStorage(key, value),
+    () => deleteFromStorage(key)
+  ];
 }

@@ -129,6 +129,26 @@ describe('Integration Tests', () => {
     expect(localStorage.getItem(key)).toBe(null);
   });
 
+  it('Works with an initial object value with no previous value found in the local storage', () => {
+    const key = 'user';
+    const initialValue = { name: 'John Cena' };
+    const testComponentId = 'id';
+
+    localStorage.removeItem(key);
+    expect(localStorage.getItem(key)).toBe(null);
+
+    const TestComponent = () => {
+      const [value] = useLocalStorage(key, initialValue);
+      return (
+        <p data-testid={testComponentId}>{value!.name}</p>
+      );
+    };
+
+    const testComponent = render(<TestComponent />);
+    expect(testComponent.getByTestId(testComponentId).textContent).toBe(initialValue.name);
+    expect(JSON.parse(localStorage.getItem(key)!)).toEqual(initialValue);
+  });
+
   it('useLocalStorage with a default value renders a component with a default value', () => {
     const key = 'yogl';
     const initialValue = 'thanos did nothing wrong';
