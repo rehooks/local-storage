@@ -1,0 +1,27 @@
+{
+  "projectName": "@rehooks/local-storage",
+  "projectOwner": "rehooks",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "none",
+  "contributors": [
+    {
+      "login": "iamsolankiamit",
+      "name": "Amit Solanki",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/3483526?v=4",
+      "profile": "http://solankiamit.com",
+      "contributions": [
+        "code",
+        "doc",
+        "ideas",
+        "review"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}
