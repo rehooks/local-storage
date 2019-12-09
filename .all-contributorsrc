@@ -46,6 +46,17 @@
         "test",
         "bug"
       ]
+    },
+    {
+      "login": "jarlah",
+      "name": "Jarl André Hübenthal",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/404102?v=4",
+      "profile": "https://hübenthal.no",
+      "contributions": [
+        "code",
+        "test",
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7
