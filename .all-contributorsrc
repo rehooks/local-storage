@@ -1,5 +1,5 @@
 {
-  "projectName": "@rehooks/local-storage",
+  "projectName": "local-storage",
   "projectOwner": "rehooks",
   "repoType": "github",
   "repoHost": "https://github.com",
@@ -20,6 +20,20 @@
         "doc",
         "ideas",
         "review"
+      ]
+    },
+    {
+      "login": "jharrilim",
+      "name": "Joe",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/19535809?v=4",
+      "profile": "https://jharrilim.github.io/",
+      "contributions": [
+        "code",
+        "example",
+        "ideas",
+        "maintenance",
+        "review",
+        "test"
       ]
     }
   ],
