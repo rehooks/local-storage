@@ -66,6 +66,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "devalbo",
+      "name": "Albert Boehmler",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1653890?v=4",
+      "profile": "http://devalbo.blogspot.com/",
+      "contributions": [
+        "code",
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7
