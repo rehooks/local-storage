@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useLocalStorage, writeStorage, deleteFromStorage } from '../src';
 import { renderHook } from 'react-hooks-testing-library';
 import { render, fireEvent, act, cleanup } from '@testing-library/react';
@@ -188,4 +188,30 @@ describe('Integration Tests', () => {
     expect(localStorage.getItem(key)).toBe(secondValue);
   });
 
+
+  it('can be called with a non-constant key in a custom hook.', async () => {
+    // https://github.com/rehooks/local-storage/issues/38
+    const key = 'lotr';
+    const initialName = 'Bilbo Baggins';
+    const finalName = 'Gandalf The Grey';
+    const finalNameResolver = new Promise<string>(resolve => resolve(finalName));
+
+    const useAsyncStorage = (storageKey: string, asyncAge: Promise<string>, defaultValue?: string) => {
+      const [age, setAge] = useLocalStorage(storageKey, defaultValue || '');
+      useEffect(() => {
+        asyncAge.then(setAge);
+      }, [asyncAge])
+      return [age, setAge];
+    };
+
+    const { result, waitForNextUpdate } = renderHook(() => useAsyncStorage(key, finalNameResolver, initialName));
+
+    expect(localStorage.getItem(key)).toBe(initialName);
+    expect(result.current[0]).toBe(initialName);
+
+    await waitForNextUpdate();
+
+    expect(localStorage.getItem(key)).toBe(finalName);
+    expect(result.current[0]).toBe(finalName);
+  });
 });
