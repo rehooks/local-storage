@@ -34,7 +34,7 @@ function tryParse(value: string) {
  * and a function to delete the value from localStorage in position 2.
  */
 export function useLocalStorage<TValue = string>(key: string, initialValue?: TValue): [TValue | null, Dispatch<TValue>, Dispatch<void>] {
-  const [localState, updateLocalState] = useState(tryParse(localStorage.getItem(key)!));
+  const [localState, updateLocalState] = useState(tryParse(localStorage.getItem(key)!) || initialValue);
 
   const onLocalStorageChange = useCallback((event: LocalStorageChanged<TValue> | StorageEvent) => {
     if (isTypeOfLocalStorageChanged(event)) {
@@ -48,7 +48,7 @@ export function useLocalStorage<TValue = string>(key: string, initialValue?: TVa
         }
       }
     }
-  }, []);
+  }, [updateLocalState]);
 
 
   useEffect(() => {
@@ -67,7 +67,7 @@ export function useLocalStorage<TValue = string>(key: string, initialValue?: TVa
     const canWrite = !(storedValue && tryParse(storedValue) !== storedValue);
 
     // Write initial value to the local storage if it's not present or contains invalid JSON data.
-    if (initialValue && canWrite) {
+    if (initialValue !== undefined && canWrite) {
       writeStorage(key, initialValue);
     }
 
@@ -80,8 +80,8 @@ export function useLocalStorage<TValue = string>(key: string, initialValue?: TVa
     };
   }, []);
 
-  const writeState = useCallback((value: TValue) => writeStorage(key, value), []);
-  const deleteState = useCallback(() => deleteFromStorage(key), []);
+  const writeState = useCallback((value: TValue) => writeStorage(key, value), [key]);
+  const deleteState = useCallback(() => deleteFromStorage(key), [key]);
 
   return [
     localState === null ? initialValue : localState,
