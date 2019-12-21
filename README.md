@@ -6,6 +6,7 @@
 > React hook for enabling synchronization with local-storage.
 
 [![npm version](https://badge.fury.io/js/%40rehooks%2Flocal-storage.svg)](https://www.npmjs.com/package/@rehooks/local-storage)
+[![npm downloads](https://img.shields.io/npm/dw/@rehooks/local-storage)](https://www.npmjs.com/package/@rehooks/local-storage)
 
 API Docs can be found [here](https://rehooks.github.io/local-storage).
 
