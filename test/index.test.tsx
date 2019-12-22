@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocalStorage, writeStorage, deleteFromStorage } from '../src';
 import { renderHook } from 'react-hooks-testing-library';
 import { render, fireEvent, act, cleanup } from '@testing-library/react';
@@ -188,4 +188,49 @@ describe('Integration Tests', () => {
     expect(localStorage.getItem(key)).toBe(secondValue);
   });
 
+  it('https://github.com/rehooks/local-storage/issues/38', async () => {
+    const allPeople = ['Tim', 'Bob', 'Gemma'];
+    const EditAge = ({ name }: { name?: string }) => {
+      if (!name)
+        return <></>;
+      
+      const [age, setAge] = useLocalStorage(name, 0);
+
+      return (
+        <div>
+          <h1>{name}'s Age</h1>
+          <input data-testid={`${name}:input`} type={'number'} value={age!} onChange={event => setAge(parseInt(event.target.value) || age!)} />
+        </div>
+      );
+    };
+
+    const TestComponent = () => {
+      const [editPerson, setEditPerson] = useState<string | undefined>(undefined);
+      return (
+        <div>
+          <EditAge data-testid={'editAge'} name={editPerson} />
+          {allPeople.map(name =>
+            <button data-testid={name} onClick={() => setEditPerson(name)} key={name}>{name}</button>
+          )}
+        </div>
+      );
+    };
+    const { findAllByTestId } = render(<TestComponent />);
+
+    // In the beginning there is nothing there
+    expect(localStorage.getItem(allPeople[0])).toBe(null);
+
+    const [timEditAgeButton] = await findAllByTestId(allPeople[0]);
+
+    act(() => void fireEvent.click(timEditAgeButton));
+
+    // This will render the hook with Tim's name, and should use the local storage hook with the default value 0
+    expect(localStorage.getItem(allPeople[0])).toBe('0');
+
+    const [editAgeInput] = await findAllByTestId(`${allPeople[0]}:input`);
+    fireEvent.change(editAgeInput, { target: { value: 24 }});
+
+    // The event listener that is registered from the hook should use the event above to update the storage
+    expect(localStorage.getItem(allPeople[0])).toBe('24');
+  });
 });

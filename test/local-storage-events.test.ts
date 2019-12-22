@@ -45,5 +45,32 @@ describe('Module: local-storage-events', () => {
 
             expect(onLocalStorageChanged).toHaveBeenCalledTimes(1);
         });
+
+        describe('numbers', () => {
+            it('can write positive numbers', () => {
+                const key = 'nice';
+                const value = 42069;
+
+                writeStorage(key, value);
+
+                expect(localStorage.getItem(key)).toBe(`${value}`);
+            });
+
+            it('can write negative numbers', () => {
+                const key = 'onestepforward';
+                const value = -2;
+                
+                writeStorage(key, value);
+
+                expect(localStorage.getItem(key)).toBe(`${value}`);
+            });
+            it('can write 0', () => {
+                const key = 'I\'ve become so number';
+                const value = 0;
+                writeStorage(key, value);
+
+                expect(localStorage.getItem(key)).toBe(`${value}`);
+            });
+        });
     });
 });
