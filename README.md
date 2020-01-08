@@ -35,7 +35,7 @@ yarn add @rehooks/local-storage
 ### With NPM
 
 ```sh
-npm i @rehooks/local-storage
+npm i @rehooks/local-storage --save
 ```
 
 ## Usage
