@@ -60,7 +60,7 @@ export function useLocalStorage<TValue = string>(
         }
       }
     },
-    [updateLocalState]
+    [updateLocalState, key]
   );
 
   useEffect(() => {
