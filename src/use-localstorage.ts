@@ -82,7 +82,7 @@ export function useLocalStorage<TValue = string>(
       window.removeEventListener(LocalStorageChanged.eventName, listener);
       window.removeEventListener('storage', listener);
     };
-  }, []);
+  }, [key]);
 
   const writeState = useCallback((value: TValue) => writeStorage(key, value), [key]);
   const deleteState = useCallback(() => deleteFromStorage(key), [key]);
