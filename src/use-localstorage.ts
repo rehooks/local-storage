@@ -60,6 +60,11 @@ export function useLocalStorage<TValue = string>(
     }
   };
 
+  // when the key changes, update localState to reflect it.
+  useEffect(() => {
+    updateLocalState(tryParse(localStorage.getItem(key)!) || initialValue);
+  }, [key]);
+
   useEffect(() => {
     // The custom storage event allows us to update our component
     // when a change occurs in localStorage outside of our component
