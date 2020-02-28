@@ -52,7 +52,7 @@ export function useLocalStorage<TValue = string>(
     tryParse(localStorage.getItem(key)!) || initialValue
   );
 
-  const onLocalStorageChange = (event: LocalStorageChangedEvent<TValue> | StorageEvent) => {
+  const onLocalStorageChange = (event: LocalStorageChangeEvent<TValue> | StorageEvent) => {
     if (isTypeOfLocalStorageChanged(event)) {
       if (event.detail.key === key) {
         updateLocalState(event.detail.value);
@@ -69,7 +69,7 @@ export function useLocalStorage<TValue = string>(
   useEffect(() => {
     // The custom storage event allows us to update our component
     // when a change occurs in localStorage outside of our component
-    const listener = (e: Event) => onLocalStorageChange(e as LocalStorageChangedEvent<TValue>);
+    const listener = (e: Event) => onLocalStorageChange(e as LocalStorageChangeEvent<TValue>);
     window.addEventListener(eventName, listener);
 
     // The storage event only works in the context of other documents (eg. other browser tabs)
