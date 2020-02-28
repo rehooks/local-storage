@@ -193,7 +193,7 @@ describe('Integration Tests', () => {
     const EditAge = ({ name }: { name?: string }) => {
       if (!name)
         return <></>;
-      
+
       const [age, setAge] = useLocalStorage(name, 0);
 
       return (
@@ -228,9 +228,30 @@ describe('Integration Tests', () => {
     expect(localStorage.getItem(allPeople[0])).toBe('0');
 
     const [editAgeInput] = await findAllByTestId(`${allPeople[0]}:input`);
-    fireEvent.change(editAgeInput, { target: { value: 24 }});
+    fireEvent.change(editAgeInput, { target: { value: 24 } });
 
     // The event listener that is registered from the hook should use the event above to update the storage
     expect(localStorage.getItem(allPeople[0])).toBe('24');
+  });
+
+  it('should update localState when the key changes externally', async () => {
+    const TestComponent = () => {
+      const [key, set] = React.useState('key1');
+      let [name, setName] = useLocalStorage(key, 'default value');
+      React.useEffect(() => {
+        setName('key1 name');
+        setTimeout(() => set('key2'));
+      }, []);
+
+      return (
+        <div>
+          <h1>{name}</h1>
+        </div>
+      );
+    };
+
+    const { findByText } = render(<TestComponent />);
+    expect(await findByText(/key1 name/i)).toBeDefined();
+    expect(await findByText(/default value/i)).toBeDefined();
   });
 });
