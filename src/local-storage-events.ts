@@ -1,8 +1,12 @@
+const CustomEvent = require("custom-event");
+
 interface KVP<K, V> {
     key: K,
     value: V
 }
 
+export const eventName = 'onLocalStorageChange';
+export type LocalStorageChangeEvent<TValue> = CustomEvent<KVP<string, TValue>>;
 
 /**
  * Used for creating new events for LocalStorage. This enables us to
@@ -13,12 +17,8 @@ interface KVP<K, V> {
  * @class LocalStorageChanged
  * @extends {CustomEvent<KVP<string, string>>}
  */
-export class LocalStorageChanged<TValue> extends CustomEvent<KVP<string, TValue>> {
-    static eventName = 'onLocalStorageChange';
-
-    constructor(payload: KVP<string, TValue>) {
-        super(LocalStorageChanged.eventName, { detail: payload });
-    }
+export function LocalStorageChanged<TValue>(payload: KVP<string, TValue>): LocalStorageChangeEvent<TValue> {
+    return new CustomEvent(eventName, { detail: payload });
 }
 
 /**
@@ -29,8 +29,8 @@ export class LocalStorageChanged<TValue> extends CustomEvent<KVP<string, TValue>
  * @param {*} evt the object you wish to assert as a LocalStorageChanged event.
  * @returns {evt is LocalStorageChanged<TValue>} if true, evt is asserted to be LocalStorageChanged.
  */
-export function isTypeOfLocalStorageChanged<TValue>(evt: any): evt is LocalStorageChanged<TValue> {
-    return (!!evt) && (evt instanceof LocalStorageChanged || (evt.detail && evt.type === LocalStorageChanged.eventName));
+export function isTypeOfLocalStorageChanged<TValue>(evt: any): evt is CustomEvent<KVP<string, TValue>> {
+    return (!!evt) && (evt.detail && evt.type === eventName);
 }
 
 /**
@@ -50,7 +50,7 @@ export function isTypeOfLocalStorageChanged<TValue>(evt: any): evt is LocalStora
 export function writeStorage<TValue>(key: string, value: TValue) {
     try {
         localStorage.setItem(key, typeof value === 'object' ? JSON.stringify(value) : `${value}`);
-        window.dispatchEvent(new LocalStorageChanged({ key, value }));
+        window.dispatchEvent(LocalStorageChanged({ key, value }));
     } catch (err) {
         if (err instanceof TypeError && err.message.includes('circular structure')) {
             throw new TypeError(
@@ -83,5 +83,5 @@ export function writeStorage<TValue>(key: string, value: TValue) {
  */
 export function deleteFromStorage(key: string) {
     localStorage.removeItem(key);
-    window.dispatchEvent(new LocalStorageChanged({ key, value: '' }))
+    window.dispatchEvent(LocalStorageChanged({ key, value: '' }))
 }
