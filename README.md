@@ -1,18 +1,18 @@
-# `@rehooks/local-storage`
+# `@substrate/local-storage`
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 > React hook for enabling synchronization with local-storage.
 
-[![npm version](https://badge.fury.io/js/%40rehooks%2Flocal-storage.svg)](https://www.npmjs.com/package/@rehooks/local-storage)
-[![npm downloads](https://img.shields.io/npm/dw/@rehooks/local-storage)](https://www.npmjs.com/package/@rehooks/local-storage)
+[![npm version](https://badge.fury.io/js/%40rehooks%2Flocal-storage.svg)](https://www.npmjs.com/package/@substrate/local-storage)
+[![npm downloads](https://img.shields.io/npm/dw/@substrate/local-storage)](https://www.npmjs.com/package/@substrate/local-storage)
 
 API Docs can be found [here](https://rehooks.github.io/local-storage).
 
 ## Table of Contents
 
-- [`@rehooks/local-storage`](#rehookslocal-storage)
+- [`@substrate/local-storage`](#rehookslocal-storage)
   - [Table of Contents](#Table-of-Contents)
   - [Install](#Install)
     - [With Yarn](#With-Yarn)
@@ -29,13 +29,13 @@ API Docs can be found [here](https://rehooks.github.io/local-storage).
 ### With Yarn
 
 ```sh
-yarn add @rehooks/local-storage
+yarn add @substrate/local-storage
 ```
 
 ### With NPM
 
 ```sh
-npm i @rehooks/local-storage --save
+npm i @substrate/local-storage --save
 ```
 
 ## Usage
@@ -49,7 +49,7 @@ This can be anywhere from within your application.
 
 ```jsx
 import React from 'react';
-import { writeStorage } from '@rehooks/local-storage';
+import { writeStorage } from '@substrate/local-storage';
 
 let counter = 0;
 
@@ -69,7 +69,7 @@ __Javascript__:
 
 ```jsx
 import React from 'react';
-import { useLocalStorage } from '@rehooks/local-storage';
+import { useLocalStorage } from '@substrate/local-storage';
 
 function MyComponent() {
   const [counterValue] = useLocalStorage('i'); // send the key to be tracked.
@@ -85,7 +85,7 @@ __Typescript__:
 
 ```tsx
 import React from 'react';
-import { useLocalStorage } from '@rehooks/local-storage';
+import { useLocalStorage } from '@substrate/local-storage';
 
 function MyComponent() {
   const [counterValue] = useLocalStorage<number>('i'); // specify a type argument for your type
@@ -104,7 +104,7 @@ function MyComponent() {
 
 ```jsx
 import React from 'react';
-import { useLocalStorage } from '@rehooks/local-storage';
+import { useLocalStorage } from '@substrate/local-storage';
 
 function MyComponent() {
   // Note: The type of user can be inferred from the default value type
@@ -122,7 +122,7 @@ function MyComponent() {
 You may also delete items from the local storage as well.
 
 ```js
-import { writeStorage, deleteFromStorage } from '@rehooks/local-storage';
+import { writeStorage, deleteFromStorage } from '@substrate/local-storage';
 
 writeStorage('name', 'Homer Simpson'); // Add an item first
 
@@ -141,7 +141,7 @@ You may view this example [here on StackBlitz.](https://stackblitz.com/edit/reac
 ```jsx
 import React, { Fragment } from 'react';
 import { render } from 'react-dom';
-import { writeStorage, deleteFromStorage, useLocalStorage } from '@rehooks/local-storage';
+import { writeStorage, deleteFromStorage, useLocalStorage } from '@substrate/local-storage';
 
 const startingNum = 0;
 

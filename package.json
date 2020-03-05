@@ -1,20 +1,21 @@
 {
-  "name": "@rehooks/local-storage",
-  "version": "2.2.2",
-  "description": "React hook for local-storage",
+  "name": "@substrate/local-storage",
+  "version": "2.2.3",
+  "description": "Fork: React hook for local-storage",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
     "build:types": "tsc --emitDeclarationOnly",
     "docs": "typedoc --out docs src && touch docs/.nojekyll",
+    "publish": "npm publish",
     "test": "jest --verbose",
     "test:watch": "jest --verbose --watch",
     "example": "npm run build && parcel example/example.html"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/rehooks/local-storage.git"
+    "url": "https://github.com/yjkimjunior/local-storage.git"
   },
   "author": "Amit Solanki <amit.fash@gmail.com>",
   "contributors": [
