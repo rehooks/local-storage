@@ -1,6 +1,6 @@
 {
   "name": "@substrate/local-storage",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "description": "Fork: React hook for local-storage",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
