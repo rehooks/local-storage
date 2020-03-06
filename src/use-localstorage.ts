@@ -7,10 +7,11 @@ import {
 } from './local-storage-events';
 import { useEffect, useState, Dispatch, useCallback } from 'react';
 
-if (typeof localStorage === "undefined" || localStorage === null) {
-  const LocalStorage = require('node-localstorage').LocalStorage;
-  localStorage = new LocalStorage('./scratch');
-}
+const LocalStorage = require('node-localstorage').LocalStorage;
+
+let localStorage = typeof window === "undefined"
+  ? new LocalStorage('./scratch')
+  : window.localStorage;
 
 function tryParse(value: string) {
   try {

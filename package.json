@@ -1,6 +1,6 @@
 {
   "name": "@substrate/local-storage",
-  "version": "2.2.4",
+  "version": "2.2.9",
   "description": "Fork: React hook for local-storage",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -8,7 +8,6 @@
     "build": "tsc",
     "build:types": "tsc --emitDeclarationOnly",
     "docs": "typedoc --out docs src && touch docs/.nojekyll",
-    "publish": "npm publish",
     "test": "jest --verbose",
     "test:watch": "jest --verbose --watch",
     "example": "npm run build && parcel example/example.html"
