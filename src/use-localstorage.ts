@@ -43,7 +43,7 @@ export function useLocalStorage<TValue = string>(
   initialValue?: TValue
 ): [TValue | null, Dispatch<TValue>, Dispatch<void>] {
   const [localState, updateLocalState] = useState(
-    tryParse(localStorage.getItem(key)!) || initialValue
+      localStorage.getItem(key) === null ? initialValue : tryParse(localStorage.getItem(key)!)
   );
 
   const onLocalStorageChange = (event: LocalStorageChanged<TValue> | StorageEvent) => {
@@ -62,7 +62,7 @@ export function useLocalStorage<TValue = string>(
 
   // when the key changes, update localState to reflect it.
   useEffect(() => {
-    updateLocalState(tryParse(localStorage.getItem(key)!) || initialValue);
+    updateLocalState(localStorage.getItem(key) === null ? initialValue : tryParse(localStorage.getItem(key)!));
   }, [key]);
 
   useEffect(() => {
@@ -74,9 +74,15 @@ export function useLocalStorage<TValue = string>(
     // The storage event only works in the context of other documents (eg. other browser tabs)
     window.addEventListener('storage', listener);
 
-    // We need to check if there is a stored value because we do not wish to overwrite it.
+    // We need to check if there is a stored value
+    // and if the stored value is a boolean
+    // because local storage value should not be updated if parsed value is false but stored value is "false"
     const storedValue = localStorage.getItem(key);
-    const canWrite = !(storedValue && tryParse(storedValue) !== storedValue);
+    const canWrite = storedValue === null
+        || (
+            typeof tryParse(storedValue) !== 'boolean'
+              && tryParse(storedValue) !== storedValue
+        );
 
     // Write initial value to the local storage if it's not present or contains invalid JSON data.
     if (initialValue !== undefined && canWrite) {
