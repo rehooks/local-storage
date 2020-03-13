@@ -1,6 +1,5 @@
 import { useLocalStorage } from '../src';
 import { renderHook } from 'react-hooks-testing-library';
-import {render} from "@testing-library/react";
 
 describe('Module: use-localstorage', () => {
     describe('useLocalStorage', () => {
