@@ -44,5 +44,31 @@ describe('Module: use-localstorage', () => {
             expect(result.current[0]).toBe(defaultValue);
             expect(localStorage.getItem(key)).toBe(`${defaultValue}`);
         });
+
+        describe('when existing value is false', () => {
+            it ('returns false value when the default value is true', () => {
+                const key = 'AmIFalse';
+                const defaultValue = true;
+
+                localStorage.setItem(key, 'false');
+
+                const { result } = renderHook(() => useLocalStorage(key, defaultValue));
+
+                expect(result.current[0]).toBe(false);
+                expect(JSON.parse(localStorage.getItem(key)!)).toBe(false);
+            });
+
+            it('returns false value when default value is false', () => {
+                const key = 'AmIFalse';
+                const defaultValue = false;
+
+                localStorage.setItem(key, 'false');
+
+                const { result } = renderHook(() => useLocalStorage(key, defaultValue));
+
+                expect(result.current[0]).toBe(false);
+                expect(JSON.parse(localStorage.getItem(key)!)).toBe(false);
+            });
+        });
     });
 });

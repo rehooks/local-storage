@@ -14,6 +14,15 @@ function tryParse(value: string) {
   }
 }
 
+function isValidJSON(value: string) {
+  try {
+    JSON.parse(value);
+  } catch {
+    return false;
+  }
+  return true;
+}
+
 /**
  * React hook to enable updates to state via localStorage.
  * This updates when the {writeStorage} function is used, when the returned function
@@ -43,7 +52,7 @@ export function useLocalStorage<TValue = string>(
   initialValue?: TValue
 ): [TValue | null, Dispatch<TValue>, Dispatch<void>] {
   const [localState, updateLocalState] = useState(
-    tryParse(localStorage.getItem(key)!) || initialValue
+      localStorage.getItem(key) === null ? initialValue : tryParse(localStorage.getItem(key)!)
   );
 
   const onLocalStorageChange = (event: LocalStorageChanged<TValue> | StorageEvent) => {
@@ -62,7 +71,7 @@ export function useLocalStorage<TValue = string>(
 
   // when the key changes, update localState to reflect it.
   useEffect(() => {
-    updateLocalState(tryParse(localStorage.getItem(key)!) || initialValue);
+    updateLocalState(localStorage.getItem(key) === null ? initialValue : tryParse(localStorage.getItem(key)!));
   }, [key]);
 
   useEffect(() => {
@@ -74,9 +83,7 @@ export function useLocalStorage<TValue = string>(
     // The storage event only works in the context of other documents (eg. other browser tabs)
     window.addEventListener('storage', listener);
 
-    // We need to check if there is a stored value because we do not wish to overwrite it.
-    const storedValue = localStorage.getItem(key);
-    const canWrite = !(storedValue && tryParse(storedValue) !== storedValue);
+    const canWrite = localStorage.getItem(key) === null || !isValidJSON(localStorage.getItem(key)!);
 
     // Write initial value to the local storage if it's not present or contains invalid JSON data.
     if (initialValue !== undefined && canWrite) {
