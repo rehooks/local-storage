@@ -47,11 +47,13 @@ function isValidJSON(value: string) {
  * associated with the key in position 0, a function to set the value in position 1,
  * and a function to delete the value from localStorage in position 2.
  */
+export function useLocalStorage<TValue = string>(key: string): [TValue | null, (newValue: TValue) => void, () => void];
+export function useLocalStorage<TValue = string>(key: string, initialValue: TValue): [TValue, (newValue: TValue) => void, () => void];
 export function useLocalStorage<TValue = string>(
   key: string,
   initialValue?: TValue
-): [TValue | null, Dispatch<TValue>, Dispatch<void>] {
-  const [localState, updateLocalState] = useState(
+) {
+  const [localState, updateLocalState] = useState<TValue>(
       localStorage.getItem(key) === null ? initialValue : tryParse(localStorage.getItem(key)!)
   );
 

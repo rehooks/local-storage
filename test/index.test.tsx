@@ -222,7 +222,7 @@ describe('Integration Tests', () => {
 
     const [timEditAgeButton] = await findAllByTestId(allPeople[0]);
 
-    act(() => void fireEvent.click(timEditAgeButton));
+    fireEvent.click(timEditAgeButton);
 
     // This will render the hook with Tim's name, and should use the local storage hook with the default value 0
     expect(localStorage.getItem(allPeople[0])).toBe('0');
@@ -237,21 +237,26 @@ describe('Integration Tests', () => {
   it('should update localState when the key changes externally', async () => {
     const TestComponent = () => {
       const [key, set] = React.useState('key1');
-      let [name, setName] = useLocalStorage(key, 'default value');
-      React.useEffect(() => {
-        setName('key1 name');
-        setTimeout(() => set('key2'));
-      }, []);
-
+      const [name, setName] = useLocalStorage(key, 'default value');
+      useEffect(() => {
+        setName('The First Value');
+      }, [])
       return (
         <div>
-          <h1>{name}</h1>
+          <h1 data-testid={'header'}>{name}</h1>
+          <button data-testid={'btn'} onClick={() => set('key2')}>Change State</button>
         </div>
       );
     };
 
-    const { findByText } = render(<TestComponent />);
-    expect(await findByText(/key1 name/i)).toBeDefined();
-    expect(await findByText(/default value/i)).toBeDefined();
+    const { findByTestId } = render(<TestComponent />);
+    const h1 = await findByTestId('header');
+    const btn = await findByTestId('btn');
+
+    expect(localStorage.getItem('key1')).toBe('The First Value');
+    expect(h1.textContent).toBe('The First Value');
+
+    fireEvent.click(btn);
+    expect(h1.textContent).toBe('default value');
   });
 });
