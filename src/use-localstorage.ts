@@ -14,15 +14,6 @@ function tryParse(value: string) {
   }
 }
 
-function isValidJSON(value: string) {
-  try {
-    JSON.parse(value);
-  } catch {
-    return false;
-  }
-  return true;
-}
-
 /**
  * React hook to enable updates to state via localStorage.
  * This updates when the {writeStorage} function is used, when the returned function
@@ -85,7 +76,7 @@ export function useLocalStorage<TValue = string>(
     // The storage event only works in the context of other documents (eg. other browser tabs)
     window.addEventListener('storage', listener);
 
-    const canWrite = localStorage.getItem(key) === null || !isValidJSON(localStorage.getItem(key)!);
+    const canWrite = localStorage.getItem(key) === null;
 
     // Write initial value to the local storage if it's not present or contains invalid JSON data.
     if (initialValue !== undefined && canWrite) {

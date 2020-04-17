@@ -5,9 +5,29 @@ describe('Module: use-localstorage', () => {
     describe('useLocalStorage', () => {
         it('is callable', () => {
             const { result } = renderHook(() => useLocalStorage('foo', 'bar'));
-
             expect(result.current).toBeDefined();
         });
+
+        it('accepts non-JSON strings', () => {
+            const key = 'name';
+            const initialValue = 'bond';
+            localStorage.setItem(key, initialValue);
+
+            const { result } = renderHook(() => useLocalStorage(key));
+
+            expect(result.current[0]).toBe(initialValue);
+        });
+
+        it('returns a javascript object if it finds a JSON string', () => {
+            const key = '🛸🛸🛸🛸🛸';
+            const value = { _: 'a', 3: true, z: { y: [2] } };
+            localStorage.setItem(key, JSON.stringify(value));
+
+            const { result } = renderHook(() => useLocalStorage(key));
+
+            expect(result.current[0]).toEqual(value);
+        });
+
 
         it('does not override existing data', () => {
             const key = `dynamickey-` + Date.now();
@@ -46,7 +66,7 @@ describe('Module: use-localstorage', () => {
         });
 
         describe('when existing value is false', () => {
-            it ('returns false value when the default value is true', () => {
+            it('returns false value when the default value is true', () => {
                 const key = 'AmIFalse';
                 const defaultValue = true;
 
