@@ -8,6 +8,7 @@
     "build": "tsc",
     "build:types": "tsc --emitDeclarationOnly",
     "docs": "typedoc --out docs src && touch docs/.nojekyll",
+    "prepublishOnly": "npm run build",
     "test": "jest --verbose",
     "test:watch": "jest --verbose --watch",
     "example": "npm run build && parcel example/example.html"
