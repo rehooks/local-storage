@@ -38,12 +38,14 @@ function tryParse(value: string) {
  * associated with the key in position 0, a function to set the value in position 1,
  * and a function to delete the value from localStorage in position 2.
  */
+export function useLocalStorage<TValue = string>(key: string): [TValue | null, (newValue: TValue) => void, () => void];
+export function useLocalStorage<TValue = string>(key: string, initialValue: TValue): [TValue, (newValue: TValue) => void, () => void];
 export function useLocalStorage<TValue = string>(
   key: string,
   initialValue?: TValue
-): [TValue | null, Dispatch<TValue>, Dispatch<void>] {
-  const [localState, updateLocalState] = useState(
-    tryParse(localStorage.getItem(key)!) || initialValue
+) {
+  const [localState, updateLocalState] = useState<TValue>(
+      localStorage.getItem(key) === null ? initialValue : tryParse(localStorage.getItem(key)!)
   );
 
   const onLocalStorageChange = (event: LocalStorageChanged<TValue> | StorageEvent) => {
@@ -62,7 +64,7 @@ export function useLocalStorage<TValue = string>(
 
   // when the key changes, update localState to reflect it.
   useEffect(() => {
-    updateLocalState(tryParse(localStorage.getItem(key)!) || initialValue);
+    updateLocalState(localStorage.getItem(key) === null ? initialValue : tryParse(localStorage.getItem(key)!));
   }, [key]);
 
   useEffect(() => {
@@ -74,9 +76,7 @@ export function useLocalStorage<TValue = string>(
     // The storage event only works in the context of other documents (eg. other browser tabs)
     window.addEventListener('storage', listener);
 
-    // We need to check if there is a stored value because we do not wish to overwrite it.
-    const storedValue = localStorage.getItem(key);
-    const canWrite = !(storedValue && tryParse(storedValue) !== storedValue);
+    const canWrite = localStorage.getItem(key) === null;
 
     // Write initial value to the local storage if it's not present or contains invalid JSON data.
     if (initialValue !== undefined && canWrite) {
