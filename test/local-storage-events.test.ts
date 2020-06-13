@@ -1,4 +1,4 @@
-import { LocalStorageChanged, writeStorage } from '../src/local-storage-events';
+import { LocalStorageChanged, writeStorage, deleteFromStorage } from '../src/local-storage-events';
 
 describe('Module: local-storage-events', () => {
     describe('LocalStorageChanged', () => {
@@ -72,5 +72,30 @@ describe('Module: local-storage-events', () => {
                 expect(localStorage.getItem(key)).toBe(`${value}`);
             });
         });
+    });
+
+    describe('deleteStorage', () => {
+        describe('when deleting a value that already exists', () => {
+            it('becomes null', () => {
+                const key = 'chocolate';
+                const value = 'Cadbury';
+
+                localStorage.setItem(key, value);
+                expect(localStorage.getItem(key)).toBe(value);
+
+                deleteFromStorage(key);
+
+                expect(localStorage.getItem(key)).toBe(null);
+            });
+        });
+        describe('when deleting a value that does not exist', () => {
+            it('is still null', () => {
+                const key = 'chocolate';
+                
+                expect(localStorage.getItem(key)).toBe(null);
+                expect(() => deleteFromStorage(key)).not.toThrow();
+                expect(localStorage.getItem(key)).toBe(null);
+            });
+        })
     });
 });

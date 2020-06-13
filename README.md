@@ -12,17 +12,27 @@ API Docs can be found [here](https://rehooks.github.io/local-storage).
 
 ## Table of Contents
 
-- [`@rehooks/local-storage`](#rehookslocal-storage)
-  - [Table of Contents](#Table-of-Contents)
-  - [Install](#Install)
-    - [With Yarn](#With-Yarn)
-    - [With NPM](#With-NPM)
-  - [Usage](#Usage)
-    - [Write to Storage](#Write-to-Storage)
-    - [Read From Storage](#Read-From-Storage)
-      - [Optionally use a default value](#Optionally-use-a-default-value)
-    - [Delete From Storage](#Delete-From-Storage)
-  - [Full Example](#Full-Example)
+- [@rehooks/local-storage](#rehookslocal-storage)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Install](#install)
+    - [With Yarn](#with-yarn)
+    - [With NPM](#with-npm)
+  - [Usage](#usage)
+    - [Write to Storage](#write-to-storage)
+    - [Read From Storage](#read-from-storage)
+      - [Optionally use a default value](#optionally-use-a-default-value)
+    - [Delete From Storage](#delete-from-storage)
+    - [Using With Context](#using-with-context)
+  - [Full Example](#full-example)
+  - [Contributors ✨](#contributors-)
+
+## Features
+
+- Automatic JSON serialization
+- Syncrhonization across multiple tabs
+- Provides functions for updating the localStorage and triggering a state update outside of the component
+- Type hinting via TypeScript
 
 ## Install
 
@@ -89,6 +99,7 @@ import { useLocalStorage } from '@rehooks/local-storage';
 
 function MyComponent() {
   const [counterValue] = useLocalStorage<number>('i'); // specify a type argument for your type
+  // Note: Since there was no default value provided, this is potentially null.
   return (
     <div>
       <h1>{counterValue}</h1>
@@ -131,6 +142,50 @@ deleteFromStorage('name'); // Deletes the item
 const thisIsNull = localStorage.getItem('name'); // This is indeed null
 ```
 
+### Using With Context
+
+It is advisable to use this hook with context if you want to have a properly 
+synchronized default value. Using `useLocalStorage` in two different components
+with the same key but different default values can lead to unexpected behaviour.
+
+Using Context will also prevent components from rendering and setting 
+default values to the localStorage when you just want them to be deleted from localStorage
+(assuming the context provider also does not re-render).
+
+```jsx
+import React, { createContext, useContext } from 'react';
+import { useLocalStorage } from '@rehooks/local-storage';
+
+const defaultProfile = { name: 'Spongekebob' };
+const defaultContextValue = [defaultProfile, () => {}, () => {}];
+
+const ProfileContext = createContext(defaultContextValue);
+
+export const ProfileProvider = ({ children }) => {
+  const ctxValue = useLocalStorage('profile', defaultProfile);
+  return (
+    <ProfileContext.Provider value={ctxValue}>
+      {children}
+    </ProfileContext.Provider>
+  );
+};
+
+const useProfile = () => useContext(ProfileContext);
+
+const App = () => {
+  const [profile] = useProfile();
+  return <h1>{profile && profile.name}</h1>;
+};
+
+export default () => {
+  return (
+    <ProfileProvider>
+      <App />
+    </ProfileProvider>
+  );
+};
+```
+
 ## Full Example
 
 You may view this example [here on StackBlitz.](https://stackblitz.com/edit/react-vbrkjb?embed=1&file=index.js)
@@ -168,7 +223,7 @@ const IncrememterWithButtons = () => {
   return (
     <Fragment>
       <p>{typeof(number) === 'number' ? number : 'Try incrementing the number!'}</p>
-      <button onClick={_ => setNum(getNum !== null ? +(number) + 1 : startingNum)}>Increment</button>
+      <button onClick={_ => setNum(number !== null ? +(number) + 1 : startingNum)}>Increment</button>
       <button onClick={deleteNum}>Delete</button>
     </Fragment>
   );

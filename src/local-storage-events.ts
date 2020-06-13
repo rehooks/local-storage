@@ -67,6 +67,8 @@ export function writeStorage<TValue>(key: string, value: TValue) {
 /**
  * Use this function to delete a value from localStorage.
  *
+ * After calling this function, the localStorage value will be null.
+ * 
  * @example
  * ```js
  * const user = { name: 'John', email: 'John@fakemail.com' };
@@ -76,6 +78,8 @@ export function writeStorage<TValue>(key: string, value: TValue) {
  * 
  * // This will also trigger an update to the state of your component
  * deleteFromStorage('user');
+ * 
+ * localStorage.getItem('user') === null // ✔ This is now null
  * ```
  * 
  * @export
@@ -83,5 +87,5 @@ export function writeStorage<TValue>(key: string, value: TValue) {
  */
 export function deleteFromStorage(key: string) {
     localStorage.removeItem(key);
-    window.dispatchEvent(new LocalStorageChanged({ key, value: '' }))
+    window.dispatchEvent(new LocalStorageChanged({ key, value: null }))
 }
