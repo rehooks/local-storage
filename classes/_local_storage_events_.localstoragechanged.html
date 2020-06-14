@@ -1,0 +1,816 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>LocalStorageChanged | @rehooks/local-storage</title>
+	<meta name="description" content="Documentation for @rehooks/local-storage">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">@rehooks/local-storage</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="../modules/_local_storage_events_.html">&quot;local-storage-events&quot;</a>
+				</li>
+				<li>
+					<a href="_local_storage_events_.localstoragechanged.html">LocalStorageChanged</a>
+				</li>
+			</ul>
+			<h1>Class LocalStorageChanged&lt;TValue&gt;</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Used for creating new events for LocalStorage. This enables us to
+							have the ability of updating the LocalStorage from outside of the component,
+							but still update the component without prop drilling or creating a dependency
+						on a large library such as Redux.</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-type-parameters">
+				<h3>Type parameters</h3>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>TValue</h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<a href="_local_storage_events_.localstoragechanged.html#customevent" class="tsd-signature-type">CustomEvent</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_local_storage_events_.kvp.html" class="tsd-signature-type">KVP</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">LocalStorageChanged</span>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_local_storage_events_.localstoragechanged.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_local_storage_events_.localstoragechanged.html#at_target" class="tsd-kind-icon">AT_<wbr>TARGET</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_local_storage_events_.localstoragechanged.html#bubbling_phase" class="tsd-kind-icon">BUBBLING_<wbr>PHASE</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_local_storage_events_.localstoragechanged.html#capturing_phase" class="tsd-kind-icon">CAPTURING_<wbr>PHASE</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_local_storage_events_.localstoragechanged.html#none" class="tsd-kind-icon">NONE</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_local_storage_events_.localstoragechanged.html#bubbles" class="tsd-kind-icon">bubbles</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_local_storage_events_.localstoragechanged.html#cancelbubble" class="tsd-kind-icon">cancel<wbr>Bubble</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_local_storage_events_.localstoragechanged.html#cancelable" class="tsd-kind-icon">cancelable</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_local_storage_events_.localstoragechanged.html#composed" class="tsd-kind-icon">composed</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_local_storage_events_.localstoragechanged.html#currenttarget" class="tsd-kind-icon">current<wbr>Target</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_local_storage_events_.localstoragechanged.html#defaultprevented" class="tsd-kind-icon">default<wbr>Prevented</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_local_storage_events_.localstoragechanged.html#detail" class="tsd-kind-icon">detail</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_local_storage_events_.localstoragechanged.html#eventphase" class="tsd-kind-icon">event<wbr>Phase</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_local_storage_events_.localstoragechanged.html#istrusted" class="tsd-kind-icon">is<wbr>Trusted</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_local_storage_events_.localstoragechanged.html#returnvalue" class="tsd-kind-icon">return<wbr>Value</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_local_storage_events_.localstoragechanged.html#srcelement" class="tsd-kind-icon">src<wbr>Element</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_local_storage_events_.localstoragechanged.html#target" class="tsd-kind-icon">target</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_local_storage_events_.localstoragechanged.html#timestamp" class="tsd-kind-icon">time<wbr>Stamp</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_local_storage_events_.localstoragechanged.html#type" class="tsd-kind-icon">type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="_local_storage_events_.localstoragechanged.html#customevent" class="tsd-kind-icon">Custom<wbr>Event</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="_local_storage_events_.localstoragechanged.html#eventname" class="tsd-kind-icon">event<wbr>Name</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-inherited">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_local_storage_events_.localstoragechanged.html#composedpath" class="tsd-kind-icon">composed<wbr>Path</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_local_storage_events_.localstoragechanged.html#initcustomevent" class="tsd-kind-icon">init<wbr>Custom<wbr>Event</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_local_storage_events_.localstoragechanged.html#initevent" class="tsd-kind-icon">init<wbr>Event</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_local_storage_events_.localstoragechanged.html#preventdefault" class="tsd-kind-icon">prevent<wbr>Default</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_local_storage_events_.localstoragechanged.html#stopimmediatepropagation" class="tsd-kind-icon">stop<wbr>Immediate<wbr>Propagation</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_local_storage_events_.localstoragechanged.html#stoppropagation" class="tsd-kind-icon">stop<wbr>Propagation</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Local<wbr>Storage<wbr>Changed<span class="tsd-signature-symbol">(</span>payload<span class="tsd-signature-symbol">: </span><a href="../interfaces/_local_storage_events_.kvp.html" class="tsd-signature-type">KVP</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_local_storage_events_.localstoragechanged.html" class="tsd-signature-type">LocalStorageChanged</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/rehooks/local-storage/blob/2ebf00b/src/local-storage-events.ts#L17">src/local-storage-events.ts:17</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>payload: <a href="../interfaces/_local_storage_events_.kvp.html" class="tsd-signature-type">KVP</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_local_storage_events_.localstoragechanged.html" class="tsd-signature-type">LocalStorageChanged</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="at_target" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> AT_<wbr>TARGET</h3>
+					<div class="tsd-signature tsd-kind-icon">AT_<wbr>TARGET<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_local_storage_events_.localstoragechanged.html">LocalStorageChanged</a>.<a href="_local_storage_events_.localstoragechanged.html#at_target">AT_TARGET</a></p>
+						<ul>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5336</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="bubbling_phase" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> BUBBLING_<wbr>PHASE</h3>
+					<div class="tsd-signature tsd-kind-icon">BUBBLING_<wbr>PHASE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_local_storage_events_.localstoragechanged.html">LocalStorageChanged</a>.<a href="_local_storage_events_.localstoragechanged.html#bubbling_phase">BUBBLING_PHASE</a></p>
+						<ul>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5337</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="capturing_phase" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> CAPTURING_<wbr>PHASE</h3>
+					<div class="tsd-signature tsd-kind-icon">CAPTURING_<wbr>PHASE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_local_storage_events_.localstoragechanged.html">LocalStorageChanged</a>.<a href="_local_storage_events_.localstoragechanged.html#capturing_phase">CAPTURING_PHASE</a></p>
+						<ul>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5338</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="none" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> NONE</h3>
+					<div class="tsd-signature tsd-kind-icon">NONE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_local_storage_events_.localstoragechanged.html">LocalStorageChanged</a>.<a href="_local_storage_events_.localstoragechanged.html#none">NONE</a></p>
+						<ul>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5339</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="bubbles" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> bubbles</h3>
+					<div class="tsd-signature tsd-kind-icon">bubbles<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_local_storage_events_.localstoragechanged.html">LocalStorageChanged</a>.<a href="_local_storage_events_.localstoragechanged.html#bubbles">bubbles</a></p>
+						<ul>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5278</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Returns true or false depending on how event was initialized. True if event goes through its target&#39;s ancestors in reverse tree order, and false otherwise.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="cancelbubble" class="tsd-anchor"></a>
+					<h3>cancel<wbr>Bubble</h3>
+					<div class="tsd-signature tsd-kind-icon">cancel<wbr>Bubble<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_local_storage_events_.localstoragechanged.html">LocalStorageChanged</a>.<a href="_local_storage_events_.localstoragechanged.html#cancelbubble">cancelBubble</a></p>
+						<ul>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5279</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="cancelable" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> cancelable</h3>
+					<div class="tsd-signature tsd-kind-icon">cancelable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_local_storage_events_.localstoragechanged.html">LocalStorageChanged</a>.<a href="_local_storage_events_.localstoragechanged.html#cancelable">cancelable</a></p>
+						<ul>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5283</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Returns true or false depending on how event was initialized. Its return value does not always carry meaning, but true can indicate that part of the operation during which event was dispatched, can be canceled by invoking the preventDefault() method.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="composed" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> composed</h3>
+					<div class="tsd-signature tsd-kind-icon">composed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_local_storage_events_.localstoragechanged.html">LocalStorageChanged</a>.<a href="_local_storage_events_.localstoragechanged.html#composed">composed</a></p>
+						<ul>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5287</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Returns true or false depending on how event was initialized. True if event invokes listeners past a ShadowRoot node that is the root of its target, and false otherwise.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="currenttarget" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> current<wbr>Target</h3>
+					<div class="tsd-signature tsd-kind-icon">current<wbr>Target<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventTarget</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_local_storage_events_.localstoragechanged.html">LocalStorageChanged</a>.<a href="_local_storage_events_.localstoragechanged.html#currenttarget">currentTarget</a></p>
+						<ul>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5291</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Returns the object whose event listener&#39;s callback is currently being invoked.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="defaultprevented" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> default<wbr>Prevented</h3>
+					<div class="tsd-signature tsd-kind-icon">default<wbr>Prevented<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_local_storage_events_.localstoragechanged.html">LocalStorageChanged</a>.<a href="_local_storage_events_.localstoragechanged.html#defaultprevented">defaultPrevented</a></p>
+						<ul>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5295</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Returns true if preventDefault() was invoked successfully to indicate cancelation, and false otherwise.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="detail" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> detail</h3>
+					<div class="tsd-signature tsd-kind-icon">detail<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_local_storage_events_.kvp.html" class="tsd-signature-type">KVP</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_local_storage_events_.localstoragechanged.html">LocalStorageChanged</a>.<a href="_local_storage_events_.localstoragechanged.html#detail">detail</a></p>
+						<ul>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:3733</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Returns any custom data event was created with. Typically used for synthetic events.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="eventphase" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> event<wbr>Phase</h3>
+					<div class="tsd-signature tsd-kind-icon">event<wbr>Phase<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_local_storage_events_.localstoragechanged.html">LocalStorageChanged</a>.<a href="_local_storage_events_.localstoragechanged.html#eventphase">eventPhase</a></p>
+						<ul>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5299</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Returns the event&#39;s phase, which is one of NONE, CAPTURING_PHASE, AT_TARGET, and BUBBLING_PHASE.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="istrusted" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> is<wbr>Trusted</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Trusted<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_local_storage_events_.localstoragechanged.html">LocalStorageChanged</a>.<a href="_local_storage_events_.localstoragechanged.html#istrusted">isTrusted</a></p>
+						<ul>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5303</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Returns true if event was dispatched by the user agent, and false otherwise.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="returnvalue" class="tsd-anchor"></a>
+					<h3>return<wbr>Value</h3>
+					<div class="tsd-signature tsd-kind-icon">return<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_local_storage_events_.localstoragechanged.html">LocalStorageChanged</a>.<a href="_local_storage_events_.localstoragechanged.html#returnvalue">returnValue</a></p>
+						<ul>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5304</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="srcelement" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> src<wbr>Element</h3>
+					<div class="tsd-signature tsd-kind-icon">src<wbr>Element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventTarget</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_local_storage_events_.localstoragechanged.html">LocalStorageChanged</a>.<a href="_local_storage_events_.localstoragechanged.html#srcelement">srcElement</a></p>
+						<ul>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5306</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>deprecated</dt>
+							<dd></dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="target" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> target</h3>
+					<div class="tsd-signature tsd-kind-icon">target<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventTarget</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_local_storage_events_.localstoragechanged.html">LocalStorageChanged</a>.<a href="_local_storage_events_.localstoragechanged.html#target">target</a></p>
+						<ul>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5310</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Returns the object to which event is dispatched (its target).</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="timestamp" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> time<wbr>Stamp</h3>
+					<div class="tsd-signature tsd-kind-icon">time<wbr>Stamp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_local_storage_events_.localstoragechanged.html">LocalStorageChanged</a>.<a href="_local_storage_events_.localstoragechanged.html#timestamp">timeStamp</a></p>
+						<ul>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5314</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Returns the event&#39;s timestamp as the number of milliseconds measured relative to the time origin.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="type" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> type</h3>
+					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_local_storage_events_.localstoragechanged.html">LocalStorageChanged</a>.<a href="_local_storage_events_.localstoragechanged.html#type">type</a></p>
+						<ul>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5318</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Returns the type of event, e.g. &quot;click&quot;, &quot;hashchange&quot;, or &quot;submit&quot;.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="customevent" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> Custom<wbr>Event</h3>
+					<div class="tsd-signature tsd-kind-icon">Custom<wbr>Event<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>constructor<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>prototype<span class="tsd-signature-symbol">: </span><a href="_local_storage_events_.localstoragechanged.html#customevent" class="tsd-signature-type">CustomEvent</a><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:3737</li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5>constructor<span class="tsd-signature-symbol">: </span>function</h5>
+								<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-type-literal tsd-has-type-parameter">
+									<li class="tsd-signature tsd-kind-icon">new __type&lt;T&gt;<span class="tsd-signature-symbol">(</span>typeArg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, eventInitDict<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">CustomEventInit</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_local_storage_events_.localstoragechanged.html#customevent" class="tsd-signature-type">CustomEvent</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<aside class="tsd-sources">
+											<ul>
+												<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:3738</li>
+											</ul>
+										</aside>
+										<h4 class="tsd-type-parameters-title">Type parameters</h4>
+										<ul class="tsd-type-parameters">
+											<li>
+												<h4>T</h4>
+											</li>
+										</ul>
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>typeArg: <span class="tsd-signature-type">string</span></h5>
+											</li>
+											<li>
+												<h5><span class="tsd-flag ts-flagOptional">Optional</span> eventInitDict: <span class="tsd-signature-type">CustomEventInit</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <a href="_local_storage_events_.localstoragechanged.html#customevent" class="tsd-signature-type">CustomEvent</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+									</li>
+								</ul>
+							</li>
+							<li class="tsd-parameter">
+								<h5>prototype<span class="tsd-signature-symbol">: </span><a href="_local_storage_events_.localstoragechanged.html#customevent" class="tsd-signature-type">CustomEvent</a></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="eventname" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> event<wbr>Name</h3>
+					<div class="tsd-signature tsd-kind-icon">event<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;onLocalStorageChange&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/rehooks/local-storage/blob/2ebf00b/src/local-storage-events.ts#L17">src/local-storage-events.ts:17</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="composedpath" class="tsd-anchor"></a>
+					<h3>composed<wbr>Path</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">composed<wbr>Path<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">EventTarget</span><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="_local_storage_events_.localstoragechanged.html">LocalStorageChanged</a>.<a href="_local_storage_events_.localstoragechanged.html#composedpath">composedPath</a></p>
+								<ul>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5322</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the invocation target objects of event&#39;s path (objects on which listeners will be invoked), except for any nodes in shadow trees of which the shadow root&#39;s mode is &quot;closed&quot; that are not reachable from event&#39;s currentTarget.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">EventTarget</span><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="initcustomevent" class="tsd-anchor"></a>
+					<h3>init<wbr>Custom<wbr>Event</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">init<wbr>Custom<wbr>Event<span class="tsd-signature-symbol">(</span>typeArg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, canBubbleArg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, cancelableArg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, detailArg<span class="tsd-signature-symbol">: </span><a href="../interfaces/_local_storage_events_.kvp.html" class="tsd-signature-type">KVP</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="_local_storage_events_.localstoragechanged.html">LocalStorageChanged</a>.<a href="_local_storage_events_.localstoragechanged.html#initcustomevent">initCustomEvent</a></p>
+								<ul>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:3734</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>typeArg: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>canBubbleArg: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+								<li>
+									<h5>cancelableArg: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+								<li>
+									<h5>detailArg: <a href="../interfaces/_local_storage_events_.kvp.html" class="tsd-signature-type">KVP</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="initevent" class="tsd-anchor"></a>
+					<h3>init<wbr>Event</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">init<wbr>Event<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, bubbles<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span>, cancelable<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="_local_storage_events_.localstoragechanged.html">LocalStorageChanged</a>.<a href="_local_storage_events_.localstoragechanged.html#initevent">initEvent</a></p>
+								<ul>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5323</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>type: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> bubbles: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> cancelable: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="preventdefault" class="tsd-anchor"></a>
+					<h3>prevent<wbr>Default</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">prevent<wbr>Default<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="_local_storage_events_.localstoragechanged.html">LocalStorageChanged</a>.<a href="_local_storage_events_.localstoragechanged.html#preventdefault">preventDefault</a></p>
+								<ul>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5327</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>If invoked when the cancelable attribute value is true, and while executing a listener for the event with passive set to false, signals to the operation that caused event to be dispatched that it needs to be canceled.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="stopimmediatepropagation" class="tsd-anchor"></a>
+					<h3>stop<wbr>Immediate<wbr>Propagation</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">stop<wbr>Immediate<wbr>Propagation<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="_local_storage_events_.localstoragechanged.html">LocalStorageChanged</a>.<a href="_local_storage_events_.localstoragechanged.html#stopimmediatepropagation">stopImmediatePropagation</a></p>
+								<ul>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5331</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Invoking this method prevents event from reaching any registered event listeners after the current one finishes running and, when dispatched in a tree, also prevents event from reaching any other objects.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="stoppropagation" class="tsd-anchor"></a>
+					<h3>stop<wbr>Propagation</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">stop<wbr>Propagation<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="_local_storage_events_.localstoragechanged.html">LocalStorageChanged</a>.<a href="_local_storage_events_.localstoragechanged.html#stoppropagation">stopPropagation</a></p>
+								<ul>
+									<li>Defined in node_modules/typescript/lib/lib.dom.d.ts:5335</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>When dispatched in a tree, invoking this method prevents event from reaching any objects other than the current object.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_index_.html">&quot;index&quot;</a>
+					</li>
+					<li class="current tsd-kind-module">
+						<a href="../modules/_local_storage_events_.html">&quot;local-<wbr>storage-<wbr>events&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_use_localstorage_.html">&quot;use-<wbr>localstorage&quot;</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="_local_storage_events_.localstoragechanged.html" class="tsd-kind-icon">Local<wbr>Storage<wbr>Changed</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="_local_storage_events_.localstoragechanged.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_local_storage_events_.localstoragechanged.html#at_target" class="tsd-kind-icon">AT_<wbr>TARGET</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_local_storage_events_.localstoragechanged.html#bubbling_phase" class="tsd-kind-icon">BUBBLING_<wbr>PHASE</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_local_storage_events_.localstoragechanged.html#capturing_phase" class="tsd-kind-icon">CAPTURING_<wbr>PHASE</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_local_storage_events_.localstoragechanged.html#none" class="tsd-kind-icon">NONE</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_local_storage_events_.localstoragechanged.html#bubbles" class="tsd-kind-icon">bubbles</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_local_storage_events_.localstoragechanged.html#cancelbubble" class="tsd-kind-icon">cancel<wbr>Bubble</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_local_storage_events_.localstoragechanged.html#cancelable" class="tsd-kind-icon">cancelable</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_local_storage_events_.localstoragechanged.html#composed" class="tsd-kind-icon">composed</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_local_storage_events_.localstoragechanged.html#currenttarget" class="tsd-kind-icon">current<wbr>Target</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_local_storage_events_.localstoragechanged.html#defaultprevented" class="tsd-kind-icon">default<wbr>Prevented</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_local_storage_events_.localstoragechanged.html#detail" class="tsd-kind-icon">detail</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_local_storage_events_.localstoragechanged.html#eventphase" class="tsd-kind-icon">event<wbr>Phase</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_local_storage_events_.localstoragechanged.html#istrusted" class="tsd-kind-icon">is<wbr>Trusted</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_local_storage_events_.localstoragechanged.html#returnvalue" class="tsd-kind-icon">return<wbr>Value</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_local_storage_events_.localstoragechanged.html#srcelement" class="tsd-kind-icon">src<wbr>Element</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_local_storage_events_.localstoragechanged.html#target" class="tsd-kind-icon">target</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_local_storage_events_.localstoragechanged.html#timestamp" class="tsd-kind-icon">time<wbr>Stamp</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_local_storage_events_.localstoragechanged.html#type" class="tsd-kind-icon">type</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="_local_storage_events_.localstoragechanged.html#customevent" class="tsd-kind-icon">Custom<wbr>Event</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="_local_storage_events_.localstoragechanged.html#eventname" class="tsd-kind-icon">event<wbr>Name</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_local_storage_events_.localstoragechanged.html#composedpath" class="tsd-kind-icon">composed<wbr>Path</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_local_storage_events_.localstoragechanged.html#initcustomevent" class="tsd-kind-icon">init<wbr>Custom<wbr>Event</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_local_storage_events_.localstoragechanged.html#initevent" class="tsd-kind-icon">init<wbr>Event</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_local_storage_events_.localstoragechanged.html#preventdefault" class="tsd-kind-icon">prevent<wbr>Default</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_local_storage_events_.localstoragechanged.html#stopimmediatepropagation" class="tsd-kind-icon">stop<wbr>Immediate<wbr>Propagation</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_local_storage_events_.localstoragechanged.html#stoppropagation" class="tsd-kind-icon">stop<wbr>Propagation</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
+						<a href="../interfaces/_local_storage_events_.kvp.html" class="tsd-kind-icon">KVP</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="../modules/_local_storage_events_.html#deletefromstorage" class="tsd-kind-icon">delete<wbr>From<wbr>Storage</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="../modules/_local_storage_events_.html#istypeoflocalstoragechanged" class="tsd-kind-icon">is<wbr>Type<wbr>OfLocal<wbr>Storage<wbr>Changed</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="../modules/_local_storage_events_.html#writestorage" class="tsd-kind-icon">write<wbr>Storage</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

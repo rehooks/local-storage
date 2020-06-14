@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>@rehooks/local-storage</title>
-	<meta name="description" content="">
+	<meta name="description" content="Documentation for @rehooks/local-storage">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
 </head>
@@ -13,7 +13,7 @@
 	<div class="tsd-page-toolbar">
 		<div class="container">
 			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
 					<div class="field">
 						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
 						<input id="tsd-search-field" type="text" />
@@ -56,7 +56,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> @rehooks/local-storage</h1>
+			<h1>@rehooks/local-storage</h1>
 		</div>
 	</div>
 </header>
@@ -64,15 +64,25 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<p><a href="https://www.npmjs.com/package/@rehooks/local-storage"><img src="https://badge.fury.io/js/%40rehooks%2Flocal-storage.svg" alt="npm version"></a></p>
-				<h1 id="-rehooks-local-storage"><code>@rehooks/local-storage</code></h1>
+				<a href="#rehookslocal-storage" id="rehookslocal-storage" style="color: inherit; text-decoration: none;">
+					<h1>@rehooks/local-storage</h1>
+				</a>
+				<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+				<p><a href="#contributors-"><img src="https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square" alt="All Contributors"></a></p>
+				<!-- ALL-CONTRIBUTORS-BADGE:END -->
 				<blockquote>
-					<p>React hook for local-storage</p>
+					<p>React hook for enabling synchronization with local-storage.</p>
 				</blockquote>
-				<h2 id="table-of-contents">Table of Contents</h2>
+				<p><a href="https://www.npmjs.com/package/@rehooks/local-storage"><img src="https://badge.fury.io/js/%40rehooks%2Flocal-storage.svg" alt="npm version"></a>
+				<a href="https://www.npmjs.com/package/@rehooks/local-storage"><img src="https://img.shields.io/npm/dw/@rehooks/local-storage" alt="npm downloads"></a></p>
+				<p>API Docs can be found <a href="https://rehooks.github.io/local-storage">here</a>.</p>
+				<a href="#table-of-contents" id="table-of-contents" style="color: inherit; text-decoration: none;">
+					<h2>Table of Contents</h2>
+				</a>
 				<ul>
-					<li><a href="#rehookslocal-storage"><code>@rehooks/local-storage</code></a><ul>
+					<li><a href="#rehookslocal-storage">@rehooks/local-storage</a><ul>
 							<li><a href="#table-of-contents">Table of Contents</a></li>
+							<li><a href="#features">Features</a></li>
 							<li><a href="#install">Install</a><ul>
 									<li><a href="#with-yarn">With Yarn</a></li>
 									<li><a href="#with-npm">With NPM</a></li>
@@ -80,76 +90,238 @@
 							</li>
 							<li><a href="#usage">Usage</a><ul>
 									<li><a href="#write-to-storage">Write to Storage</a></li>
-									<li><a href="#read-from-storage">Read From Storage</a></li>
+									<li><a href="#read-from-storage">Read From Storage</a><ul>
+											<li><a href="#optionally-use-a-default-value">Optionally use a default value</a></li>
+										</ul>
+									</li>
 									<li><a href="#delete-from-storage">Delete From Storage</a></li>
+									<li><a href="#using-with-context">Using With Context</a></li>
 								</ul>
 							</li>
 							<li><a href="#full-example">Full Example</a></li>
+							<li><a href="#contributors-">Contributors ✨</a></li>
 						</ul>
 					</li>
 				</ul>
-				<h2 id="install">Install</h2>
-				<h3 id="with-yarn">With Yarn</h3>
+				<a href="#features" id="features" style="color: inherit; text-decoration: none;">
+					<h2>Features</h2>
+				</a>
+				<ul>
+					<li>Automatic JSON serialization</li>
+					<li>Syncrhonization across multiple tabs</li>
+					<li>Provides functions for updating the localStorage and triggering a state update outside of the component</li>
+					<li>Type hinting via TypeScript</li>
+				</ul>
+				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
+					<h2>Install</h2>
+				</a>
+				<a href="#with-yarn" id="with-yarn" style="color: inherit; text-decoration: none;">
+					<h3>With Yarn</h3>
+				</a>
 				<pre><code class="language-sh">yarn add @rehooks/<span class="hljs-built_in">local</span>-storage</code></pre>
-				<h3 id="with-npm">With NPM</h3>
-				<pre><code class="language-sh">npm i @rehooks/<span class="hljs-built_in">local</span>-storage</code></pre>
-				<h2 id="usage">Usage</h2>
-				<h3 id="write-to-storage">Write to Storage</h3>
+				<a href="#with-npm" id="with-npm" style="color: inherit; text-decoration: none;">
+					<h3>With NPM</h3>
+				</a>
+				<pre><code class="language-sh">npm i @rehooks/<span class="hljs-built_in">local</span>-storage --save</code></pre>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h2>Usage</h2>
+				</a>
+				<a href="#write-to-storage" id="write-to-storage" style="color: inherit; text-decoration: none;">
+					<h3>Write to Storage</h3>
+				</a>
 				<p>This can be anywhere from within your application.</p>
-				<pre><code class="language-js"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
-<span class="hljs-keyword">import</span> { writeStorage } <span class="hljs-keyword">from</span> <span class="hljs-string">'@rehooks/local-storage'</span>;
+				<blockquote>
+					<p>Note: Objects that are passed to writeStorage are automatically stringified.
+					This will not work for circular structures.</p>
+				</blockquote>
+				<pre><code class="language-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<span class="hljs-keyword">import</span> { writeStorage } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@rehooks/local-storage&#x27;</span>;
 
 <span class="hljs-keyword">let</span> counter = <span class="hljs-number">0</span>;
 
-<span class="hljs-keyword">const</span> MyButton = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
-  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{_</span> =&gt;</span> writeStorage('i', ++counter)}&gt;
+<span class="hljs-keyword">const</span> MyButton = <span class="hljs-function">() =&gt;</span> (
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{_</span> =&gt;</span> writeStorage(&#x27;i&#x27;, ++counter)}&gt;
     Click Me
   <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
 );
 </code></pre>
-				<h3 id="read-from-storage">Read From Storage</h3>
+				<a href="#read-from-storage" id="read-from-storage" style="color: inherit; text-decoration: none;">
+					<h3>Read From Storage</h3>
+				</a>
 				<p>This component will receive updates to itself from local storage.</p>
-				<pre><code class="language-js"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
-<span class="hljs-keyword">import</span> { useLocalStorage } <span class="hljs-keyword">from</span> <span class="hljs-string">'@rehooks/local-storage'</span>;
+				<p><strong>Javascript</strong>:</p>
+				<pre><code class="language-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<span class="hljs-keyword">import</span> { useLocalStorage } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@rehooks/local-storage&#x27;</span>;
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyComponent</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-keyword">const</span> [counterValue] = useLocalStorage(<span class="hljs-string">'i'</span>); <span class="hljs-comment">// send the key to be tracked.</span>
+  <span class="hljs-keyword">const</span> [counterValue] = useLocalStorage(<span class="hljs-string">&#x27;i&#x27;</span>); <span class="hljs-comment">// send the key to be tracked.</span>
   <span class="hljs-keyword">return</span> (
     <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>{counterValue}<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }</code></pre>
-				<h3 id="delete-from-storage">Delete From Storage</h3>
-				<p>You may also delete items from the local storage as well.</p>
-				<pre><code class="language-js"><span class="hljs-keyword">import</span> { writeStorage, deleteFromStorage } <span class="hljs-keyword">from</span> <span class="hljs-string">'@rehooks/local-storage'</span>;
+				<p><strong>Typescript</strong>:</p>
+				<pre><code class="language-tsx">import React from &#39;react&#39;;
+import { useLocalStorage } from &#39;@rehooks/local-storage&#39;;
 
-writeStorage(<span class="hljs-string">'name'</span>, <span class="hljs-string">'Homer Simpson'</span>); <span class="hljs-comment">// Add an item first</span>
+function MyComponent() {
+  const [counterValue] = useLocalStorage&lt;number&gt;(&#39;i&#39;); // specify a type argument for your type
+  // Note: Since there was no default value provided, this is potentially null.
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;{counterValue}&lt;/h1&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+				<a href="#optionally-use-a-default-value" id="optionally-use-a-default-value" style="color: inherit; text-decoration: none;">
+					<h4>Optionally use a default value</h4>
+				</a>
+				<blockquote>
+					<p>Note: Objects that are passed to useLocalStorage&#39;s default parameter will be automatically
+					stringified. This will not work for circular structures.</p>
+				</blockquote>
+				<pre><code class="language-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<span class="hljs-keyword">import</span> { useLocalStorage } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@rehooks/local-storage&#x27;</span>;
 
-deleteFromStorage(<span class="hljs-string">'name'</span>); <span class="hljs-comment">// Deletes the item</span>
-
-<span class="hljs-keyword">const</span> thisIsNull = localStorage.getItem(<span class="hljs-string">'name'</span>); <span class="hljs-comment">// This is indeed null</span></code></pre>
-				<h2 id="full-example">Full Example</h2>
-				<pre><code class="language-js"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
-<span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span>;
-<span class="hljs-keyword">import</span> { writeStorage, deleteFromStorage, useLocalStorage } <span class="hljs-keyword">from</span> <span class="hljs-string">'@rehooks/local-storage'</span>;
-
-<span class="hljs-keyword">const</span> startingNum = <span class="hljs-number">0</span>;
-
-<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
-  <span class="hljs-keyword">const</span> [getNum, setNum] = useLocalStorage(<span class="hljs-string">'num'</span>);
-
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyComponent</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-comment">// Note: The type of user can be inferred from the default value type</span>
+  <span class="hljs-keyword">const</span> [user] = useLocalStorage(<span class="hljs-string">&#x27;user&#x27;</span>, { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Anakin Skywalker&#x27;</span> });
   <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{getNum}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{_</span> =&gt;</span> setNum(getNum ? getNum + 1 : 0)}&gt;Increment<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{_</span> =&gt;</span> deleteFromStorage('num')}&gt;Delete<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
-    <span class="hljs-tag">&lt;/&gt;</span>
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>{user.name}<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+  );
+}</code></pre>
+				<a href="#delete-from-storage" id="delete-from-storage" style="color: inherit; text-decoration: none;">
+					<h3>Delete From Storage</h3>
+				</a>
+				<p>You may also delete items from the local storage as well.</p>
+				<pre><code class="language-js"><span class="hljs-keyword">import</span> { writeStorage, deleteFromStorage } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@rehooks/local-storage&#x27;</span>;
+
+writeStorage(<span class="hljs-string">&#x27;name&#x27;</span>, <span class="hljs-string">&#x27;Homer Simpson&#x27;</span>); <span class="hljs-comment">// Add an item first</span>
+
+deleteFromStorage(<span class="hljs-string">&#x27;name&#x27;</span>); <span class="hljs-comment">// Deletes the item</span>
+
+<span class="hljs-keyword">const</span> thisIsNull = <span class="hljs-built_in">localStorage</span>.getItem(<span class="hljs-string">&#x27;name&#x27;</span>); <span class="hljs-comment">// This is indeed null</span></code></pre>
+				<a href="#using-with-context" id="using-with-context" style="color: inherit; text-decoration: none;">
+					<h3>Using With Context</h3>
+				</a>
+				<p>It is advisable to use this hook with context if you want to have a properly
+					synchronized default value. Using <code>useLocalStorage</code> in two different components
+				with the same key but different default values can lead to unexpected behaviour.</p>
+				<p>Using Context will also prevent components from rendering and setting
+					default values to the localStorage when you just want them to be deleted from localStorage
+				(assuming the context provider also does not re-render).</p>
+				<pre><code class="language-jsx"><span class="hljs-keyword">import</span> React, { createContext, useContext } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<span class="hljs-keyword">import</span> { useLocalStorage } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@rehooks/local-storage&#x27;</span>;
+
+<span class="hljs-keyword">const</span> defaultProfile = { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Spongekebob&#x27;</span> };
+<span class="hljs-keyword">const</span> defaultContextValue = [defaultProfile, <span class="hljs-function">() =&gt;</span> {}, <span class="hljs-function">() =&gt;</span> {}];
+
+<span class="hljs-keyword">const</span> ProfileContext = createContext(defaultContextValue);
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> ProfileProvider = <span class="hljs-function">(<span class="hljs-params">{ children }</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> ctxValue = useLocalStorage(<span class="hljs-string">&#x27;profile&#x27;</span>, defaultProfile);
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">ProfileContext.Provider</span> <span class="hljs-attr">value</span>=<span class="hljs-string">{ctxValue}</span>&gt;</span>
+      {children}
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ProfileContext.Provider</span>&gt;</span></span>
   );
 };
 
-// Assuming there is a div in index.html with an ID of 'root'
-ReactDOM.render(<span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span>, document.getElementById('root'));</span></code></pre>
+<span class="hljs-keyword">const</span> useProfile = <span class="hljs-function">() =&gt;</span> useContext(ProfileContext);
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">const</span> [profile] = useProfile();
+  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>{profile &amp;&amp; profile.name}<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span>;
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> () =&gt; {
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">ProfileProvider</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ProfileProvider</span>&gt;</span></span>
+  );
+};</code></pre>
+				<a href="#full-example" id="full-example" style="color: inherit; text-decoration: none;">
+					<h2>Full Example</h2>
+				</a>
+				<p>You may view this example <a href="https://stackblitz.com/edit/react-vbrkjb?embed=1&amp;file=index.js">here on StackBlitz.</a></p>
+				<blockquote>
+					<p>Note: The writeStorage and deleteFromStorage functions are provided from useLocalStorage as well,
+					and do not require you to specify the key when using them.</p>
+				</blockquote>
+				<pre><code class="language-jsx"><span class="hljs-keyword">import</span> React, { Fragment } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<span class="hljs-keyword">import</span> { render } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-dom&#x27;</span>;
+<span class="hljs-keyword">import</span> { writeStorage, deleteFromStorage, useLocalStorage } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@rehooks/local-storage&#x27;</span>;
+
+<span class="hljs-keyword">const</span> startingNum = <span class="hljs-number">0</span>;
+
+<span class="hljs-keyword">const</span> Clicker = <span class="hljs-function">() =&gt;</span> (
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Fragment</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h4</span>&gt;</span>Clicker<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{_</span> =&gt;</span> {
+      writeStorage(&#x27;num&#x27;, localStorage.getItem(&#x27;num&#x27;)
+      ? +(localStorage.getItem(&#x27;num&#x27;)) + 1
+      : startingNum
+      )
+    }}&gt;
+      Increment From Outside
+    <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{_</span> =&gt;</span> deleteFromStorage(&#x27;num&#x27;)}&gt;
+      Delete From Outside
+    <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Fragment</span>&gt;</span></span>
+);
+
+<span class="hljs-keyword">const</span> IncrememterWithButtons = <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">const</span> [number, setNum, deleteNum] = useLocalStorage(<span class="hljs-string">&#x27;num&#x27;</span>);
+
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Fragment</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{typeof(number) === &#x27;number&#x27; ? number : &#x27;Try incrementing the number!&#x27;}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{_</span> =&gt;</span> setNum(number !== null ? +(number) + 1 : startingNum)}&gt;Increment<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{deleteNum}</span>&gt;</span>Delete<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Fragment</span>&gt;</span></span>
+  );
+};
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function">() =&gt;</span> (
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Fragment</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span> Demo <span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">IncrememterWithButtons</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Clicker</span> /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Fragment</span>&gt;</span></span>
+);
+
+<span class="hljs-comment">// Assuming there is a div in index.html with an ID of &#x27;root&#x27;</span>
+render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span></span>, <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;root&#x27;</span>));</code></pre>
+				<a href="#contributors-✨" id="contributors-✨" style="color: inherit; text-decoration: none;">
+					<h2>Contributors ✨</h2>
+				</a>
+				<p>Thanks goes to these wonderful people (<a href="https://allcontributors.org/docs/en/emoji-key">emoji key</a>):</p>
+				<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+				<!-- prettier-ignore-start -->
+				<!-- markdownlint-disable -->
+				<table>
+					<tr>
+						<td align="center"><a href="http://solankiamit.com"><img src="https://avatars3.githubusercontent.com/u/3483526?v=4" width="100px;" alt=""/><br /><sub><b>Amit Solanki</b></sub></a><br /><a href="https://github.com/rehooks/local-storage/commits?author=iamsolankiamit" title="Code">💻</a> <a href="https://github.com/rehooks/local-storage/commits?author=iamsolankiamit" title="Documentation">📖</a> <a href="#ideas-iamsolankiamit" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/rehooks/local-storage/pulls?q=is%3Apr+reviewed-by%3Aiamsolankiamit" title="Reviewed Pull Requests">👀</a></td>
+						<td align="center"><a href="https://jharrilim.github.io/"><img src="https://avatars1.githubusercontent.com/u/19535809?v=4" width="100px;" alt=""/><br /><sub><b>Joe</b></sub></a><br /><a href="https://github.com/rehooks/local-storage/commits?author=jharrilim" title="Code">💻</a> <a href="#example-jharrilim" title="Examples">💡</a> <a href="#ideas-jharrilim" title="Ideas, Planning, & Feedback">🤔</a> <a href="#maintenance-jharrilim" title="Maintenance">🚧</a> <a href="https://github.com/rehooks/local-storage/pulls?q=is%3Apr+reviewed-by%3Ajharrilim" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/rehooks/local-storage/commits?author=jharrilim" title="Tests">⚠️</a></td>
+						<td align="center"><a href="https://github.com/fatihky"><img src="https://avatars0.githubusercontent.com/u/4169772?v=4" width="100px;" alt=""/><br /><sub><b>Fatih Kaya</b></sub></a><br /><a href="https://github.com/rehooks/local-storage/commits?author=fatihky" title="Code">💻</a> <a href="https://github.com/rehooks/local-storage/commits?author=fatihky" title="Tests">⚠️</a> <a href="https://github.com/rehooks/local-storage/issues?q=author%3Afatihky" title="Bug reports">🐛</a></td>
+						<td align="center"><a href="https://hübenthal.no"><img src="https://avatars3.githubusercontent.com/u/404102?v=4" width="100px;" alt=""/><br /><sub><b>Jarl André Hübenthal</b></sub></a><br /><a href="https://github.com/rehooks/local-storage/commits?author=jarlah" title="Code">💻</a> <a href="https://github.com/rehooks/local-storage/commits?author=jarlah" title="Tests">⚠️</a> <a href="https://github.com/rehooks/local-storage/issues?q=author%3Ajarlah" title="Bug reports">🐛</a></td>
+						<td align="center"><a href="https://jamie.build/"><img src="https://avatars0.githubusercontent.com/u/952783?v=4" width="100px;" alt=""/><br /><sub><b>Jamie Kyle</b></sub></a><br /><a href="https://github.com/rehooks/local-storage/commits?author=jamiebuilds" title="Code">💻</a></td>
+						<td align="center"><a href="http://devalbo.blogspot.com/"><img src="https://avatars3.githubusercontent.com/u/1653890?v=4" width="100px;" alt=""/><br /><sub><b>Albert Boehmler</b></sub></a><br /><a href="https://github.com/rehooks/local-storage/commits?author=devalbo" title="Code">💻</a> <a href="https://github.com/rehooks/local-storage/issues?q=author%3Adevalbo" title="Bug reports">🐛</a></td>
+						<td align="center"><a href="https://github.com/gmdayley"><img src="https://avatars3.githubusercontent.com/u/647130?v=4" width="100px;" alt=""/><br /><sub><b>Gabriel Dayley</b></sub></a><br /><a href="https://github.com/rehooks/local-storage/commits?author=gmdayley" title="Code">💻</a> <a href="https://github.com/rehooks/local-storage/issues?q=author%3Agmdayley" title="Bug reports">🐛</a></td>
+					</tr>
+					<tr>
+						<td align="center"><a href="https://github.com/mayteio"><img src="https://avatars1.githubusercontent.com/u/43975092?v=4" width="100px;" alt=""/><br /><sub><b>Harley Alexander</b></sub></a><br /><a href="#maintenance-mayteio" title="Maintenance">🚧</a> <a href="https://github.com/rehooks/local-storage/commits?author=mayteio" title="Code">💻</a> <a href="https://github.com/rehooks/local-storage/issues?q=author%3Amayteio" title="Bug reports">🐛</a> <a href="https://github.com/rehooks/local-storage/commits?author=mayteio" title="Tests">⚠️</a></td>
+					</tr>
+				</table>
+				<!-- markdownlint-enable -->
+				<!-- prettier-ignore-end -->
+				<!-- ALL-CONTRIBUTORS-LIST:END -->
+				<p>This project follows the <a href="https://github.com/all-contributors/all-contributors">all-contributors</a> specification. Contributions of any kind welcome!</p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -158,8 +330,14 @@ ReactDOM.render(<span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&
 					<li class="globals  ">
 						<a href="globals.html"><em>Globals</em></a>
 					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_index_.html">"index"</a>
+					<li class=" tsd-kind-module">
+						<a href="modules/_index_.html">&quot;index&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_local_storage_events_.html">&quot;local-<wbr>storage-<wbr>events&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_use_localstorage_.html">&quot;use-<wbr>localstorage&quot;</a>
 					</li>
 				</ul>
 			</nav>
@@ -175,62 +353,20 @@ ReactDOM.render(<span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
-				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
-				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
 				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
-				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
-				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
-				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
 				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
-				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
-				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
 				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
-				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
-				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
-				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
 			</ul>
 		</div>
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>
