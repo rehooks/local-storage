@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocalStorage, writeStorage, deleteFromStorage } from '../src';
-import { renderHook } from 'react-hooks-testing-library';
+import { renderHook } from '@testing-library/react-hooks';
 import { render, fireEvent, act, cleanup } from '@testing-library/react';
 
 
@@ -23,7 +23,7 @@ describe('Integration Tests', () => {
 
 
   it('Component should rerender from change to local storage', () => {
-    const initialValue = 'No, this is Patrick!';
+    const defaultValue = 'No, this is Patrick!';
     const key = 'star';
     const newValue = 'Punch it, Chewie!';
     const testComponentId = 'tcid';
@@ -42,7 +42,7 @@ describe('Integration Tests', () => {
       >Test Button</button>
     );
 
-    writeStorage(key, initialValue);
+    writeStorage(key, defaultValue);
 
     const testComponent = render(<Component />);
     const testButton = render(<TestButton />);
@@ -50,7 +50,7 @@ describe('Integration Tests', () => {
     expect(testComponent
       .getByTestId(testComponentId)
       .textContent
-    ).toBe(initialValue);
+    ).toBe(defaultValue);
 
     fireEvent.click(testButton.getByTestId(testButtonId));
 
@@ -79,7 +79,7 @@ describe('Integration Tests', () => {
 
       return (
         <>
-          <p data-testid={fooId}>{foo!.name}</p>
+          <p data-testid={fooId}>{foo?.name}</p>
           <button data-testid={buttonId} onClick={e => setFoo(new Foo(newFooName))}>Clicky Click</button>
           <button data-testid={buttonDelId} onClick={e => deleteFoo()}>Delete Delete</button>
         </>
@@ -112,10 +112,10 @@ describe('Integration Tests', () => {
 
   it('deleteFromStorage to trigger update on component', () => {
     const key = 'floot';
-    const initialValue = 'larg';
+    const defaultValue = 'larg';
     const testComponentId = 'someId';
 
-    writeStorage(key, initialValue);
+    writeStorage(key, defaultValue);
     const TestComponent = () => {
       const [value] = useLocalStorage(key);
       return (
@@ -131,31 +131,31 @@ describe('Integration Tests', () => {
 
   it('Works with an initial object value with no previous value found in the local storage', () => {
     const key = 'user';
-    const initialValue = { name: 'John Cena' };
+    const defaultValue = { name: 'John Cena' };
     const testComponentId = 'id';
 
     localStorage.removeItem(key);
     expect(localStorage.getItem(key)).toBe(null);
 
     const TestComponent = () => {
-      const [value] = useLocalStorage(key, initialValue);
+      const [value] = useLocalStorage(key, defaultValue);
       return (
         <p data-testid={testComponentId}>{value!.name}</p>
       );
     };
 
     const testComponent = render(<TestComponent />);
-    expect(testComponent.getByTestId(testComponentId).textContent).toBe(initialValue.name);
-    expect(JSON.parse(localStorage.getItem(key)!)).toEqual(initialValue);
+    expect(testComponent.getByTestId(testComponentId).textContent).toBe(defaultValue.name);
+    expect(JSON.parse(localStorage.getItem(key)!)).toEqual(defaultValue);
   });
 
   it('useLocalStorage with a default value renders a component with a default value', () => {
     const key = 'yogl';
-    const initialValue = 'thanos did nothing wrong';
+    const defaultValue = 'thanos did nothing wrong';
     const testComponentId = 'Hello, my name is';
 
     const TestComponent = () => {
-      const [value] = useLocalStorage(key, initialValue);
+      const [value] = useLocalStorage(key, defaultValue);
       return (
         <p data-testid={testComponentId}>{value}</p>
       );
@@ -163,18 +163,18 @@ describe('Integration Tests', () => {
 
     const testComponent = render(<TestComponent />);
 
-    expect(testComponent.getByTestId(testComponentId).textContent).toBe(initialValue);
-    expect(localStorage.getItem(key)).toBe(initialValue);
+    expect(testComponent.getByTestId(testComponentId).textContent).toBe(defaultValue);
+    expect(localStorage.getItem(key)).toBe(defaultValue);
   });
 
   it('useLocalStorage with a default value rerenders successfully when updating with writeStorage', () => {
     const key = 'crazy frog';
-    const initialValue = '✅✅✅';
+    const defaultValue = '✅✅✅';
     const secondValue = '❌❌❌';
     const testComponentId = 'ringdingdingding';
 
     const TestComponent = () => {
-      const [value] = useLocalStorage(key, initialValue);
+      const [value] = useLocalStorage(key, defaultValue);
       return (
         <p data-testid={testComponentId}>{value}</p>
       );

@@ -1,5 +1,5 @@
-import { useLocalStorage } from '../src';
-import { renderHook } from 'react-hooks-testing-library';
+import { useLocalStorage, deleteFromStorage } from '../src';
+import { renderHook, act } from '@testing-library/react-hooks';
 
 describe('Module: use-localstorage', () => {
     describe('useLocalStorage', () => {
@@ -10,12 +10,12 @@ describe('Module: use-localstorage', () => {
 
         it('accepts non-JSON strings', () => {
             const key = 'name';
-            const initialValue = 'bond';
-            localStorage.setItem(key, initialValue);
+            const defaultValue = 'bond';
+            localStorage.setItem(key, defaultValue);
 
             const { result } = renderHook(() => useLocalStorage(key));
 
-            expect(result.current[0]).toBe(initialValue);
+            expect(result.current[0]).toBe(defaultValue);
         });
 
         it('returns a javascript object if it finds a JSON string', () => {
@@ -88,6 +88,46 @@ describe('Module: use-localstorage', () => {
 
                 expect(result.current[0]).toBe(false);
                 expect(JSON.parse(localStorage.getItem(key)!)).toBe(false);
+            });
+        });
+
+        describe('when a default value is given and deleteFromStorage is called', () => {
+            describe('current value', () => {
+                it('becomes the default value', async () => {
+                    const key = 'profile';
+                    const defaultValue = { firstName: 'Corona', lastName: 'Virus', url: 'https://iam.co/vid?q=19' };
+                    const newValue: typeof defaultValue = { firstName: 'Pro', lastName: 'Test', url: 'https://www.professionaltesting.com' };
+                    const { result } = renderHook(
+                        () => useLocalStorage(key, defaultValue)
+                    );
+
+                    expect(result.current[0]).toBe(defaultValue);
+
+                    act(() => result.current[1](newValue));
+                    expect(result.current[0]).toBe(newValue);
+
+                    act(() => deleteFromStorage(key));
+                    expect(result.current[0]).toBe(defaultValue);
+                });
+            });
+            describe('the value in localStorage', () => {
+                it('is null', async () => {
+                    const key = '<<>>';
+                    const defaultValue = 'i';
+                    const newValue = 'o';
+                    const { result } = renderHook(() => useLocalStorage(key, defaultValue));
+                    
+                    expect(result.current[0]).toBe(defaultValue);
+                    expect(localStorage.getItem(key)).toBe(defaultValue);
+
+                    act(() => result.current[1](newValue));
+                    expect(localStorage.getItem(key)).toBe(newValue);
+                    expect(result.current[0]).toBe(newValue);
+
+                    act(() => result.current[2]());
+                    expect(localStorage.getItem(key)).toBe(null);
+                    expect(result.current[0]).toBe(defaultValue);
+                });
             });
         });
     });
