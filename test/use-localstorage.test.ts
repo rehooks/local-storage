@@ -1,6 +1,8 @@
 import { useLocalStorage, deleteFromStorage } from '../src';
 import { renderHook, act } from '@testing-library/react-hooks';
 
+import { storage } from '../src/storage'
+
 describe('Module: use-localstorage', () => {
     describe('useLocalStorage', () => {
         it('is callable', () => {
@@ -130,5 +132,48 @@ describe('Module: use-localstorage', () => {
                 });
             });
         });
+
+        describe("when localStorage api is disabled", () => {
+            beforeAll(() => storage.available = false)
+
+            afterAll(() => storage.available = true)
+
+            it('should return default value', () => {
+
+                const key = 'car';
+                const defaultValue = 'beamer'
+
+                const { result } = renderHook(() => useLocalStorage(key, defaultValue))
+
+                expect(result.current[0]).toBe(defaultValue)
+            })
+
+            it('still tracks state in localStorage', () => {
+                const key = 'car';
+                const defaultValue = 'beamer'
+
+                const { result } = renderHook(() => useLocalStorage(key, defaultValue))
+
+                expect(result.current[0]).toBe(defaultValue)
+
+                act(() => result.current[1]('merc'))
+                expect(result.current[0]).toEqual('merc')
+                expect(localStorage.getItem('car')).toEqual(null)
+            })
+
+            it('defaults back to defaultValue in localState when deleted', () => {
+                const key = 'unavailableAPI';
+                const defaultValue = 'localStorage'
+
+                const { result } = renderHook(() => useLocalStorage(key, defaultValue))
+
+                expect(result.current[0]).toBe(defaultValue)
+
+                act(() => result.current[1]('webrtc'))
+                expect(result.current[0]).toEqual('webrtc')
+                act(() => deleteFromStorage('unavailableAPI'))
+                expect(result.current[0]).toEqual(defaultValue)
+            })
+        })
     });
 });

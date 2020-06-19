@@ -3,6 +3,8 @@ import { useLocalStorage, writeStorage, deleteFromStorage } from '../src';
 import { renderHook } from '@testing-library/react-hooks';
 import { render, fireEvent, act, cleanup } from '@testing-library/react';
 
+import { storage } from '../src/storage'
+
 
 afterEach(() => {
   cleanup();
