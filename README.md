@@ -30,7 +30,7 @@ API Docs can be found [here](https://rehooks.github.io/local-storage).
 ## Features
 
 - Automatic JSON serialization
-- Syncrhonization across multiple tabs
+- Synchronization across multiple tabs
 - Provides functions for updating the localStorage and triggering a state update outside of the component
 - Type hinting via TypeScript
 
