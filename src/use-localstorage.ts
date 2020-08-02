@@ -20,6 +20,9 @@ function tryParse(value: string) {
   }
 }
 
+export type LocalStorageNullableReturnValue<TValue> = [TValue | null, (newValue: TValue | null) => void, () => void];
+export type LocalStorageReturnValue<TValue> = [TValue, (newValue: TValue | null) => void, () => void];
+
 /**
  * React hook to enable updates to state via localStorage.
  * This updates when the {writeStorage} function is used, when the returned function
@@ -44,10 +47,8 @@ function tryParse(value: string) {
  * associated with the key in position 0, a function to set the value in position 1,
  * and a function to delete the value from localStorage in position 2.
  */
-export function useLocalStorage<TValue = string>(key: string):
-  [TValue | null, (newValue: TValue | null) => void, () => void];
-export function useLocalStorage<TValue = string>(key: string, defaultValue: TValue):
-  [TValue, (newValue: TValue | null) => void, () => void];
+export function useLocalStorage<TValue = string>(key: string): LocalStorageNullableReturnValue<TValue>;
+export function useLocalStorage<TValue = string>(key: string, defaultValue: TValue): LocalStorageReturnValue<TValue>;
 export function useLocalStorage<TValue = string>(
   key: string,
   defaultValue: TValue | null = null,
