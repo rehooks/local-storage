@@ -2,7 +2,6 @@
  * @type {jest.ProjectConfig}
  */
 module.exports = {
-
   roots: [
     '<rootDir>/test'
   ],
@@ -16,5 +15,10 @@ module.exports = {
     'jsx',
     'json',
     'node'
-  ]
+  ],
+  globals: {
+    'ts-jest': {
+      tsConfig: 'tsconfig.test.json'
+    }
+  }
 }
