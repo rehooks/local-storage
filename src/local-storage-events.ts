@@ -1,9 +1,15 @@
-interface KVP<K, V> {
-    key: K,
-    value: V
+export interface LocalStorageEventPayload<TValue> {
+    key: string;
+    value: TValue;
 }
 
+export type LocalStorageChangedEvent<TValue> = CustomEvent<LocalStorageEventPayload<TValue>>;
 
+export interface LocalStorageChangedType<TValue> {
+    (payload: LocalStorageEventPayload<TValue>): CustomEvent<TValue>;
+    new(payload: LocalStorageEventPayload<TValue>): CustomEvent<TValue>;
+    eventName: string;
+}
 /**
  * Used for creating new events for LocalStorage. This enables us to
  * have the ability of updating the LocalStorage from outside of the component,
@@ -11,15 +17,19 @@ interface KVP<K, V> {
  * on a large library such as Redux.
  *
  * @class LocalStorageChanged
- * @extends {CustomEvent<KVP<string, string>>}
  */
-export class LocalStorageChanged<TValue> extends CustomEvent<KVP<string, TValue>> {
-    static eventName = 'onLocalStorageChange';
-
-    constructor(payload: KVP<string, TValue>) {
-        super(LocalStorageChanged.eventName, { detail: payload });
-    }
+export function createLocalStorageChangedEvent<TValue>(payload: LocalStorageEventPayload<TValue>) {
+    return new CustomEvent('onLocalStorageChange', { detail: payload });
 }
+createLocalStorageChangedEvent.eventName = 'onLocalStorageChange';
+
+// export class LocalStorageChanged<TValue> extends CustomEvent<KVP<string, TValue>> {
+//     static eventName = 'onLocalStorageChange';
+
+//     constructor(payload: KVP<string, TValue>) {
+//         super(LocalStorageChanged.eventName, { detail: payload });
+//     }
+// }
 
 /**
  * Checks if the event that is passed in is the same type as LocalStorageChanged.
@@ -29,8 +39,8 @@ export class LocalStorageChanged<TValue> extends CustomEvent<KVP<string, TValue>
  * @param {*} evt the object you wish to assert as a LocalStorageChanged event.
  * @returns {evt is LocalStorageChanged<TValue>} if true, evt is asserted to be LocalStorageChanged.
  */
-export function isTypeOfLocalStorageChanged<TValue>(evt: any): evt is LocalStorageChanged<TValue> {
-    return (!!evt) && (evt instanceof LocalStorageChanged || (evt.detail && evt.type === LocalStorageChanged.eventName));
+export function isTypeOfLocalStorageChanged<TValue>(evt: any): evt is LocalStorageChangedEvent<TValue> {
+    return (!!evt) && (evt instanceof createLocalStorageChangedEvent || (evt.detail && evt.type === createLocalStorageChangedEvent.eventName));
 }
 
 /**
@@ -50,7 +60,7 @@ export function isTypeOfLocalStorageChanged<TValue>(evt: any): evt is LocalStora
 export function writeStorage<TValue>(key: string, value: TValue) {
     try {
         localStorage.setItem(key, typeof value === 'object' ? JSON.stringify(value) : `${value}`);
-        window.dispatchEvent(new LocalStorageChanged({ key, value }));
+        window.dispatchEvent(createLocalStorageChangedEvent({ key, value }));
     } catch (err) {
         if (err instanceof TypeError && err.message.includes('circular structure')) {
             throw new TypeError(
@@ -87,5 +97,5 @@ export function writeStorage<TValue>(key: string, value: TValue) {
  */
 export function deleteFromStorage(key: string) {
     localStorage.removeItem(key);
-    window.dispatchEvent(new LocalStorageChanged({ key, value: null }))
+    window.dispatchEvent(createLocalStorageChangedEvent({ key, value: null }))
 }
