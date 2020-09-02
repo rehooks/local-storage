@@ -1,4 +1,4 @@
-import { ProxyStorage } from '../src/storage'
+import { MemoryStorageProxy, LocalStorageProxy } from '../src/storage'
 
 describe('ProxyStorage', () => {
     describe('when localStorage is available', () => {
@@ -6,11 +6,7 @@ describe('ProxyStorage', () => {
         window.localStorage.setItem('hi', 'hi')
         expect(window.localStorage.getItem('hi')).toEqual('hi')
 
-        const storage = new ProxyStorage()
-
-        it('initiates ProxyStorage as available', () => {
-            expect(storage.available).toEqual(true)
-        })
+        const storage = new LocalStorageProxy()
 
         it('calls localStorage.setItem', () => {
             storage.setItem('key1', 'value2')
@@ -34,8 +30,7 @@ describe('ProxyStorage', () => {
         window.localStorage.setItem('hi', 'hi')
         expect(window.localStorage.getItem('hi')).toEqual('hi')
 
-        const storage = new ProxyStorage()
-        storage.available = false
+        const storage = new MemoryStorageProxy()
 
         it('returns default instead of calling localStorage.setItem', () => {
             expect(storage.setItem('key4', 'value2')).toEqual(undefined)

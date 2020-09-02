@@ -27,38 +27,44 @@ export function localStorageAvailable(): boolean {
 }
 
 
-/**
- * Provides a proxy to localStorage, returning default return values
- * if `localStorage` is not available
- */
-export class ProxyStorage {
-  available: boolean
+interface IProxyStorage {
+  getItem(key: string): string | null
+  setItem(Key: string, value: string): void
+  removeItem(key: string): void
+}
 
-  constructor() {
-    this.available = localStorageAvailable()
-  }
-
+export class LocalStorageProxy implements IProxyStorage {
   getItem(key: string): string | null {
-    if (this.available === true) {
-      return localStorage.getItem(key)
-    }
-    return null
+    return localStorage.getItem(key)
   }
 
   setItem(key: string, value: string): void {
-    if (this.available === true) {
-      return localStorage.setItem(key, value)
-    }
-    return undefined
+    localStorage.setItem(key, value)
   }
 
   removeItem(key: string): void {
-    if (this.available === true) {
-      return localStorage.removeItem(key)
-    }
-    return undefined
+    localStorage.removeItem(key)
   }
 }
 
+export class MemoryStorageProxy implements IProxyStorage {
+  private _memoryStorage = new Map<string, string>()
 
-export const storage = new ProxyStorage()
+  getItem(key: string): string | null {
+    return this._memoryStorage.get(key) ?? null
+  }
+
+  setItem(key: string, value: string): void {
+    this._memoryStorage.set(key, value)
+  }
+
+  removeItem(key: string): void {
+    this._memoryStorage.delete(key)
+  }
+}
+
+const proxyStorageFrom = (isAvailable: boolean) => isAvailable
+  ? new LocalStorageProxy()
+  : new MemoryStorageProxy()
+
+export const storage = proxyStorageFrom(localStorageAvailable())

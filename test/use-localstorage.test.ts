@@ -1,8 +1,6 @@
 import { useLocalStorage, deleteFromStorage } from '../src';
 import { renderHook, act } from '@testing-library/react-hooks';
 
-import { storage } from '../src/storage'
-
 describe('Module: use-localstorage', () => {
     describe('useLocalStorage', () => {
         it('is callable', () => {
@@ -134,10 +132,6 @@ describe('Module: use-localstorage', () => {
         });
 
         describe("when localStorage api is disabled", () => {
-            beforeAll(() => storage.available = false)
-
-            afterAll(() => storage.available = true)
-
             it('should return default value', () => {
 
                 const key = 'car';
