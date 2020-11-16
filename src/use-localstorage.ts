@@ -5,7 +5,7 @@ import {
   isTypeOfLocalStorageChanged,
 } from './local-storage-events';
 import { storage  } from './storage'
-import { useEffect, useState, useCallback, useRef } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 /**
  * This exists for trying to serialize the value back to JSON.
