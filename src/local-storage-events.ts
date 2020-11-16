@@ -1,3 +1,4 @@
+import { storage  } from './storage'
 interface KVP<K, V> {
     key: K,
     value: V
@@ -49,7 +50,7 @@ export function isTypeOfLocalStorageChanged<TValue>(evt: any): evt is LocalStora
  */
 export function writeStorage<TValue>(key: string, value: TValue) {
     try {
-        localStorage.setItem(key, typeof value === 'object' ? JSON.stringify(value) : `${value}`);
+        storage.setItem(key, typeof value === 'object' ? JSON.stringify(value) : `${value}`);
         window.dispatchEvent(new LocalStorageChanged({ key, value }));
     } catch (err) {
         if (err instanceof TypeError && err.message.includes('circular structure')) {
@@ -86,6 +87,6 @@ export function writeStorage<TValue>(key: string, value: TValue) {
  * @param {string} key The key of the item you wish to delete from localStorage.
  */
 export function deleteFromStorage(key: string) {
-    localStorage.removeItem(key);
+    storage.removeItem(key);
     window.dispatchEvent(new LocalStorageChanged({ key, value: null }))
 }
