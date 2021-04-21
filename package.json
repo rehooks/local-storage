@@ -1,6 +1,6 @@
 {
   "name": "@rehooks/local-storage",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "description": "React hook for local-storage",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
