@@ -4,6 +4,7 @@ import {
   LocalStorageChanged,
   isTypeOfLocalStorageChanged,
 } from './local-storage-events';
+import { storage  } from './storage'
 import { useEffect, useState, useCallback } from 'react';
 
 /**
@@ -54,9 +55,9 @@ export function useLocalStorage<TValue = string>(
   defaultValue: TValue | null = null,
 ) {
   const [localState, updateLocalState] = useState<TValue | null>(
-    localStorage.getItem(key) === null
+    storage.getItem(key) === null
       ? defaultValue
-      : tryParse(localStorage.getItem(key)!)
+      : tryParse(storage.getItem(key)!)
   );
 
   const onLocalStorageChange = (event: LocalStorageChanged<TValue> | StorageEvent) => {
@@ -84,7 +85,7 @@ export function useLocalStorage<TValue = string>(
 
     // Write default value to the local storage if there currently isn't any value there.
     // Don't however write a defaultValue that is null otherwise it'll trigger infinite updates.
-    if (localStorage.getItem(key) === null && defaultValue !== null) {
+    if (storage.getItem(key) === null && defaultValue !== null) {
       writeStorage(key, defaultValue);
     }
 

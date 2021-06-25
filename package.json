@@ -1,6 +1,6 @@
 {
   "name": "@rehooks/local-storage",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "description": "React hook for local-storage",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -49,7 +49,7 @@
     "babel-jest": "^26.0.1",
     "browser-env": "^3.2.6",
     "jest": "^26.0.1",
-    "parcel": "^1.12.4",
+    "parcel": "^2.0.0-beta.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-test-renderer": "^16.13.1",
