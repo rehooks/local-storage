@@ -1,9 +1,8 @@
 import {
   writeStorage,
   deleteFromStorage,
-  createLocalStorageChangedEvent,
+  LocalStorageChanged,
   isTypeOfLocalStorageChanged,
-  LocalStorageChangedEvent,
 } from './local-storage-events';
 import { useEffect, useState, useCallback } from 'react';
 
@@ -60,7 +59,7 @@ export function useLocalStorage<TValue = string>(
       : tryParse(localStorage.getItem(key)!)
   );
 
-  const onLocalStorageChange = (event: LocalStorageChangedEvent<TValue> | StorageEvent) => {
+  const onLocalStorageChange = (event: LocalStorageChanged<TValue> | StorageEvent) => {
     // An event value can be of TValue when `localStorage.setItem` is called, or null when
     // `localStorage.removeItem` is called.
     if (isTypeOfLocalStorageChanged<TValue>(event)) {
@@ -77,8 +76,8 @@ export function useLocalStorage<TValue = string>(
   useEffect(() => {
     // The custom storage event allows us to update our component
     // when a change occurs in localStorage outside of our component
-    const listener = (e: Event) => onLocalStorageChange(e as LocalStorageChangedEvent<TValue>);
-    window.addEventListener(createLocalStorageChangedEvent.eventName, listener);
+    const listener = (e: Event) => onLocalStorageChange(e as LocalStorageChanged<TValue>);
+    window.addEventListener(LocalStorageChanged.eventName, listener);
 
     // The storage event only works in the context of other documents (eg. other browser tabs)
     window.addEventListener('storage', listener);
@@ -90,7 +89,7 @@ export function useLocalStorage<TValue = string>(
     }
 
     return () => {
-      window.removeEventListener(createLocalStorageChangedEvent.eventName, listener);
+      window.removeEventListener(LocalStorageChanged.eventName, listener);
       window.removeEventListener('storage', listener);
     };
   }, [key]);
