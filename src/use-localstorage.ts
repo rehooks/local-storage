@@ -63,7 +63,7 @@ export function useLocalStorage<TValue = string>(
   const onLocalStorageChange = (event: LocalStorageChanged<TValue> | StorageEvent) => {
     // An event value can be of TValue when `localStorage.setItem` is called, or null when
     // `localStorage.removeItem` is called.
-    if (isTypeOfLocalStorageChanged(event)) {
+    if (isTypeOfLocalStorageChanged<TValue>(event)) {
       if (event.detail.key === key) {
         updateLocalState(event.detail.value);
       }

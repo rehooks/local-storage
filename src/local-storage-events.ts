@@ -1,7 +1,32 @@
-import { storage  } from './storage'
-interface KVP<K, V> {
-    key: K,
-    value: V
+import { storage } from './storage';
+
+/**
+ * CustomEvent polyfill derived from: https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent
+ */
+(() => {
+    if (typeof global.window === 'undefined') {
+      global.window = {} as unknown as Window & typeof globalThis;
+    }
+
+    if (typeof global.window.CustomEvent === 'function') {
+      return;
+    }
+
+    function CustomEvent<T>(
+        typeArg: string,
+        params: CustomEventInit<T> = { bubbles: false, cancelable: false }
+    ): CustomEvent<T> {
+        const evt = document.createEvent('CustomEvent');
+        evt.initCustomEvent(typeArg, params?.bubbles ?? false, params?.cancelable ?? false, params?.detail);
+        return evt;
+    }
+
+    window.CustomEvent = CustomEvent as unknown as typeof window.CustomEvent;
+})();
+
+export interface LocalStorageEventPayload<TValue> {
+    key: string;
+    value: TValue;
 }
 
 
@@ -10,14 +35,12 @@ interface KVP<K, V> {
  * have the ability of updating the LocalStorage from outside of the component,
  * but still update the component without prop drilling or creating a dependency
  * on a large library such as Redux.
- *
- * @class LocalStorageChanged
- * @extends {CustomEvent<KVP<string, string>>}
  */
-export class LocalStorageChanged<TValue> extends CustomEvent<KVP<string, TValue>> {
+
+export class LocalStorageChanged<TValue> extends CustomEvent<LocalStorageEventPayload<TValue>> {
     static eventName = 'onLocalStorageChange';
 
-    constructor(payload: KVP<string, TValue>) {
+    constructor(payload: LocalStorageEventPayload<TValue>) {
         super(LocalStorageChanged.eventName, { detail: payload });
     }
 }
@@ -31,7 +54,7 @@ export class LocalStorageChanged<TValue> extends CustomEvent<KVP<string, TValue>
  * @returns {evt is LocalStorageChanged<TValue>} if true, evt is asserted to be LocalStorageChanged.
  */
 export function isTypeOfLocalStorageChanged<TValue>(evt: any): evt is LocalStorageChanged<TValue> {
-    return (!!evt) && (evt instanceof LocalStorageChanged || (evt.detail && evt.type === LocalStorageChanged.eventName));
+    return !!evt && evt.type === LocalStorageChanged.eventName;
 }
 
 /**
