@@ -1,11 +1,14 @@
 import { storage } from './storage';
+import { isBrowser } from './is-browser'
+
+export const LOCAL_STORAGE_CHANGE_EVENT_NAME = 'onLocalStorageChange';
 
 /**
  * CustomEvent polyfill derived from: https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent
  */
 (() => {
-    if (typeof global.window === 'undefined') {
-      global.window = {} as unknown as Window & typeof globalThis;
+    if (!isBrowser()) {
+      return;
     }
 
     if (typeof global.window.CustomEvent === 'function') {
@@ -29,52 +32,44 @@ export interface LocalStorageEventPayload<TValue> {
     value: TValue;
 }
 
-
-/**
- * Used for creating new events for LocalStorage. This enables us to
- * have the ability of updating the LocalStorage from outside of the component,
- * but still update the component without prop drilling or creating a dependency
- * on a large library such as Redux.
- */
-
-export class LocalStorageChanged<TValue> extends CustomEvent<LocalStorageEventPayload<TValue>> {
-    static eventName = 'onLocalStorageChange';
-
-    constructor(payload: LocalStorageEventPayload<TValue>) {
-        super(LocalStorageChanged.eventName, { detail: payload });
-    }
-}
-
 /**
  * Checks if the event that is passed in is the same type as LocalStorageChanged.
  *
  * @export
  * @template TValue
- * @param {*} evt the object you wish to assert as a LocalStorageChanged event.
- * @returns {evt is LocalStorageChanged<TValue>} if true, evt is asserted to be LocalStorageChanged.
+ * @param {*} evt the object you wish to assert as a onLocalStorageChange event.
+ * @returns {evt is LOCAL_STORAGE_CHANGE_EVENT_NAME} if true, evt is asserted to be onLocalStorageChange.
  */
-export function isTypeOfLocalStorageChanged<TValue>(evt: any): evt is LocalStorageChanged<TValue> {
-    return !!evt && evt.type === LocalStorageChanged.eventName;
+export function isTypeOfLocalStorageChanged<TValue>(evt: CustomEvent): any {
+    return !!evt && evt.type === LOCAL_STORAGE_CHANGE_EVENT_NAME
 }
 
 /**
  * Use this instead of directly using localStorage.setItem
  * in order to correctly send events within the same window.
- * 
+ *
  * @example
  * ```js
  * writeStorage('hello', JSON.stringify({ name: 'world' }));
  * const { name } = JSON.parse(localStorage.getItem('hello'));
  * ```
- * 
+ *
  * @export
  * @param {string} key The key to write to in the localStorage.
  * @param {string} value The value to write to in the localStorage.
  */
 export function writeStorage<TValue>(key: string, value: TValue) {
+    if (!isBrowser()) {
+        return;
+    }
+
     try {
         storage.setItem(key, typeof value === 'object' ? JSON.stringify(value) : `${value}`);
-        window.dispatchEvent(new LocalStorageChanged({ key, value }));
+        window.dispatchEvent(
+          new CustomEvent(LOCAL_STORAGE_CHANGE_EVENT_NAME, {
+              detail: { key, value },
+          })
+        )
     } catch (err) {
         if (err instanceof TypeError && err.message.includes('circular structure')) {
             throw new TypeError(
@@ -92,24 +87,32 @@ export function writeStorage<TValue>(key: string, value: TValue) {
  * Use this function to delete a value from localStorage.
  *
  * After calling this function, the localStorage value will be null.
- * 
+ *
  * @example
  * ```js
  * const user = { name: 'John', email: 'John@fakemail.com' };
- * 
+ *
  * // Add a user to your localStorage
  * writeStorage('user', JSON.stringify(user));
- * 
+ *
  * // This will also trigger an update to the state of your component
  * deleteFromStorage('user');
- * 
+ *
  * localStorage.getItem('user') === null // ✔ This is now null
  * ```
- * 
+ *
  * @export
  * @param {string} key The key of the item you wish to delete from localStorage.
  */
 export function deleteFromStorage(key: string) {
+    if (!isBrowser()) {
+        return;
+    }
+
     storage.removeItem(key);
-    window.dispatchEvent(new LocalStorageChanged({ key, value: null }))
+    window.dispatchEvent(
+      new CustomEvent(LOCAL_STORAGE_CHANGE_EVENT_NAME, {
+          detail: { key, value: null },
+      })
+    )
 }
