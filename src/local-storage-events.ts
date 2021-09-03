@@ -40,7 +40,7 @@ export interface LocalStorageEventPayload<TValue> {
  * @param {*} evt the object you wish to assert as a onLocalStorageChange event.
  * @returns {evt is LOCAL_STORAGE_CHANGE_EVENT_NAME} if true, evt is asserted to be onLocalStorageChange.
  */
-export function isTypeOfLocalStorageChanged<TValue>(evt: CustomEvent): any {
+export function isTypeOfLocalStorageChanged<TValue>(evt: CustomEvent): boolean {
     return !!evt && evt.type === LOCAL_STORAGE_CHANGE_EVENT_NAME
 }
 
