@@ -1,3 +1,5 @@
+import { isBrowser } from './is-browser'
+
 /**
  * Test if localStorage API is available
  * From https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API#Feature-detecting_localStorage
@@ -11,7 +13,7 @@ export function localStorageAvailable(): boolean {
     return true;
   }
   catch(e) {
-    return e instanceof DOMException && (
+    return isBrowser() && e instanceof DOMException && (
       // everything except Firefox
       e.code === 22 ||
       // Firefox

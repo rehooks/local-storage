@@ -1,16 +1,17 @@
 import {
   writeStorage,
   deleteFromStorage,
-  LocalStorageChanged,
   isTypeOfLocalStorageChanged,
+  LOCAL_STORAGE_CHANGE_EVENT_NAME,
 } from './local-storage-events';
+import { isBrowser } from './is-browser'
 import { storage  } from './storage'
 import { useEffect, useState, useCallback } from 'react';
 
 /**
  * This exists for trying to serialize the value back to JSON.
  * If it cannot serialize it, then it was a string value given.
- * 
+ *
  * @param value the value you wish to try to parse
  */
 function tryParse(value: string) {
@@ -60,7 +61,7 @@ export function useLocalStorage<TValue = string>(
       : tryParse(storage.getItem(key)!)
   );
 
-  const onLocalStorageChange = (event: LocalStorageChanged<TValue> | StorageEvent) => {
+  const onLocalStorageChange = useCallback((event: any | StorageEvent) => {
     // An event value can be of TValue when `localStorage.setItem` is called, or null when
     // `localStorage.removeItem` is called.
     if (isTypeOfLocalStorageChanged<TValue>(event)) {
@@ -72,13 +73,20 @@ export function useLocalStorage<TValue = string>(
         updateLocalState(event.newValue === null ? null : tryParse(event.newValue));
       }
     }
-  };
+  }, [updateLocalState, key]);
 
   useEffect(() => {
+    if (!isBrowser()) {
+      return
+    }
+
     // The custom storage event allows us to update our component
     // when a change occurs in localStorage outside of our component
-    const listener = (e: Event) => onLocalStorageChange(e as LocalStorageChanged<TValue>);
-    window.addEventListener(LocalStorageChanged.eventName, listener);
+    const listener = (e: Event) => {
+      onLocalStorageChange(e)
+    };
+
+    window.addEventListener(LOCAL_STORAGE_CHANGE_EVENT_NAME, listener);
 
     // The storage event only works in the context of other documents (eg. other browser tabs)
     window.addEventListener('storage', listener);
@@ -90,10 +98,10 @@ export function useLocalStorage<TValue = string>(
     }
 
     return () => {
-      window.removeEventListener(LocalStorageChanged.eventName, listener);
+      window.removeEventListener(LOCAL_STORAGE_CHANGE_EVENT_NAME, listener);
       window.removeEventListener('storage', listener);
     };
-  }, [key]);
+  }, [key, defaultValue, onLocalStorageChange]);
 
   const writeState = useCallback((value: TValue) => writeStorage(key, value), [key]);
   const deleteState = useCallback(() => deleteFromStorage(key), [key]);

@@ -1,27 +1,6 @@
-import { LocalStorageChanged, writeStorage, deleteFromStorage } from '../src/local-storage-events';
+import { writeStorage, deleteFromStorage, LOCAL_STORAGE_CHANGE_EVENT_NAME } from '../src/local-storage-events';
 
 describe('Module: local-storage-events', () => {
-    describe('LocalStorageChanged', () => {
-        it('is constructable with an object containing key and value', () => {
-            const key = 'foo';
-            const value = 'bar';
-
-            const localStorageChanged = new LocalStorageChanged({ key, value });
-
-            expect(localStorageChanged.detail.key).toBe(key);
-            expect(localStorageChanged.detail.value).toBe(value);
-        });
-
-        it('uses the correct event name', () => {
-            const key = 'foo';
-            const value = 'bar';
-
-            const localStorageChanged = new LocalStorageChanged({ key, value });
-
-            expect(localStorageChanged.type).toBe(LocalStorageChanged.eventName);
-        });
-    });
-
     describe('writeStorage', () => {
         it('updates the localStorage', () => {
             const key = 'foo';
@@ -36,7 +15,7 @@ describe('Module: local-storage-events', () => {
             const key = 'foo';
             const value = 'bar';
             const onLocalStorageChanged = jest.fn();
-            window.addEventListener(LocalStorageChanged.eventName, () => {
+            window.addEventListener(LOCAL_STORAGE_CHANGE_EVENT_NAME, () => {
                 onLocalStorageChanged();
             });
 
