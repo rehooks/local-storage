@@ -88,7 +88,7 @@ export function writeStorage<TValue>(key: string, value: TValue) {
  *
  * @example
  * ```js
- * updateStorage('key', (oldVal) => ({ ...oldVal, newProp: 'world' })))
+ * updateStorage('key', (oldVal) => ({ ...oldVal, count: oldVal.count + 1 })))
  * ```
  *
  * @export
