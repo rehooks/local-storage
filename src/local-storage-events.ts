@@ -82,6 +82,47 @@ export function writeStorage<TValue>(key: string, value: TValue) {
     }
 }
 
+/**
+ * Use this to update local storage based on already stored value
+ * Also sends events within the same window.
+ *
+ * @example
+ * ```js
+ * updateStorage('key', (oldVal) => ({ ...oldVal, newProp: 'world' })))
+ * ```
+ *
+ * @export
+ * @param {string} key The key to write to in the localStorage.
+ * @param {function} updateFunc the function to apply to existing value to get the new value
+ */
+
+type UpdaterFunction<TValue> = (prevVal: TValue) => TValue;
+
+export function updateStorage<TValue>(key: string, updaterFunc: UpdaterFunction<TValue>) {
+    if (!isBrowser()) {
+        return;
+    }
+
+    try {
+        const currentVal: TValue = JSON.parse(storage.getItem(key) ?? '');
+        const newVal = updaterFunc(currentVal);
+        storage.setItem(key, typeof newVal === 'object' ? JSON.stringify(newVal) : `${newVal}`);
+        window.dispatchEvent(
+          new CustomEvent(LOCAL_STORAGE_CHANGE_EVENT_NAME, {
+              detail: { key, value: newVal },
+          })
+        )
+    } catch (err) {
+        if (err instanceof TypeError && err.message.includes('circular structure')) {
+            throw new TypeError(
+                'The object that was given to the updateStorage function has circular references.\n' +
+                'For more information, check here: ' +
+                'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Cyclic_object_value'
+            );
+        }
+        throw err;
+    }
+}
 
 /**
  * Use this function to delete a value from localStorage.
