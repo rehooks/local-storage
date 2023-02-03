@@ -11,7 +11,7 @@ export const LOCAL_STORAGE_CHANGE_EVENT_NAME = 'onLocalStorageChange';
       return;
     }
 
-    if (typeof global.window.CustomEvent === 'function') {
+    if (typeof window.CustomEvent === 'function') {
       return;
     }
 
