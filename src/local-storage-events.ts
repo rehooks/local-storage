@@ -82,6 +82,34 @@ export function writeStorage<TValue>(key: string, value: TValue) {
     }
 }
 
+/**
+ * Use this instead of directly using localStorage.getItem
+ * in order to read and try to parse the value.
+ *
+ * @example
+ * ```js
+ const value = readStorage('hello');
+ * ```
+ *
+ * @export
+ * @param {string} key The key to read from in the localStorage.
+ */
+export function readStorage<TValue>(key: string): any {
+    if (!isBrowser()) {
+        return;
+    }
+
+    const value : string | null = storage.getItem(key);
+    if (value != null) {
+        try {
+            return JSON.parse(value);
+        } catch {
+            return value;
+        }
+    }
+
+    return null;
+}
 
 /**
  * Use this function to delete a value from localStorage.

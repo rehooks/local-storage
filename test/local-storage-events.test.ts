@@ -1,4 +1,4 @@
-import { writeStorage, deleteFromStorage, LOCAL_STORAGE_CHANGE_EVENT_NAME } from '../src/local-storage-events';
+import { writeStorage, deleteFromStorage, readStorage, LOCAL_STORAGE_CHANGE_EVENT_NAME } from '../src/local-storage-events';
 
 describe('Module: local-storage-events', () => {
     describe('writeStorage', () => {
@@ -42,6 +42,7 @@ describe('Module: local-storage-events', () => {
 
                 expect(localStorage.getItem(key)).toBe(`${value}`);
             });
+
             it('can write 0', () => {
                 const key = 'I\'ve become so number';
                 const value = 0;
@@ -75,5 +76,52 @@ describe('Module: local-storage-events', () => {
                 expect(localStorage.getItem(key)).toBe(null);
             });
         })
+    });
+
+    describe('readStorage', () => {
+        it('reads from localStorage', () => {
+            const key = 'foo';
+            const value = 'bar';
+
+            writeStorage(key, value);
+
+            expect(readStorage(key)).toBe(value);
+        });
+
+        describe('numbers', () => {
+            it('can read positive numbers', () => {
+                const key = 'nice';
+                const value = 42069;
+
+                writeStorage(key, value);
+
+                expect(readStorage(key)).toBe(value);
+            });
+
+            it('can read negative numbers', () => {
+                const key = 'onestepforward';
+                const value = -2;
+
+                writeStorage(key, value);
+
+                expect(readStorage(key)).toBe(value);
+            });
+
+            it('can read 0', () => {
+                const key = 'I\'ve become so number';
+                const value = 0;
+                writeStorage(key, value);
+
+                expect(readStorage(key)).toBe(value);
+            });
+
+            it('can read JSON objects', () => {
+                const key = 'myobject';
+                const value = { nice: true };
+                writeStorage(key, value);
+
+                expect(readStorage(key)).toEqual(value);
+            });
+        });
     });
 });
