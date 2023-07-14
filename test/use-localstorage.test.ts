@@ -2,11 +2,11 @@ import { useLocalStorage, deleteFromStorage } from '../src';
 import { renderHook, act } from '@testing-library/react-hooks';
 
 jest.mock('../src/storage', () => ({
-  ...jest.requireActual('../src/storage'),
-  storage: jest.fn(),
+    ...jest.requireActual('../src/storage'),
+    storage: jest.fn(),
 }));
 
-import { storage, LocalStorageProxy, MemoryStorageProxy  } from '../src/storage'
+import { storage, LocalStorageProxy, MemoryStorageProxy } from '../src/storage'
 
 describe('Module: use-localstorage', () => {
 
@@ -130,7 +130,7 @@ describe('Module: use-localstorage', () => {
                         const defaultValue = 'i';
                         const newValue = 'o';
                         const { result } = renderHook(() => useLocalStorage(key, defaultValue));
-                        
+
                         expect(result.current[0]).toBe(defaultValue);
                         expect(localStorage.getItem(key)).toBe(defaultValue);
 
@@ -143,6 +143,31 @@ describe('Module: use-localstorage', () => {
                         expect(result.current[0]).toBe(defaultValue);
                     });
                 });
+            });
+
+            describe('when a functional update is called', () => {
+                it('passes the current state to the update function', async () => {
+                    const key = 'functionUpdate';
+                    const defaultValue = 'ImTheDefault';
+                    const newValue = 'ImTheNewValue';
+                    const { result } = renderHook(() => useLocalStorage(key, defaultValue));
+
+                    act(() => result.current[1](prevValue => {
+                        expect(prevValue).toBe(defaultValue);
+                        return newValue;
+                    }));
+                    expect(result.current[0]).toBe(newValue);
+                });
+
+                it('handles updates to arrays', async () => {
+                    const key = 'arrayUpdate';
+                    const defaultValue = ['A'];
+                    const newValue = 'B';
+                    const { result } = renderHook(() => useLocalStorage(key, defaultValue));
+
+                    act(() => result.current[1](prevValue => prevValue ? [...prevValue, newValue] : [newValue]));
+                    expect(result.current[0]).toEqual([...defaultValue, newValue]);
+                })
             });
         })
 

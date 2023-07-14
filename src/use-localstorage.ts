@@ -5,7 +5,7 @@ import {
   LOCAL_STORAGE_CHANGE_EVENT_NAME,
 } from './local-storage-events';
 import { isBrowser } from './is-browser'
-import { storage  } from './storage'
+import { storage } from './storage'
 import { useEffect, useState, useCallback } from 'react';
 
 /**
@@ -22,8 +22,9 @@ function tryParse(value: string) {
   }
 }
 
-export type LocalStorageNullableReturnValue<TValue> = [TValue | null, (newValue: TValue | null) => void, () => void];
-export type LocalStorageReturnValue<TValue> = [TValue, (newValue: TValue | null) => void, () => void];
+export type LocalStorageSetStateValue<TValue> = TValue | ((prevState: TValue | null) => TValue)
+export type LocalStorageNullableReturnValue<TValue> = [TValue | null, (newValue: LocalStorageSetStateValue<TValue> | null) => void, () => void];
+export type LocalStorageReturnValue<TValue> = [TValue, (newValue: LocalStorageSetStateValue<TValue> | null) => void, () => void];
 
 /**
  * React hook to enable updates to state via localStorage.
@@ -103,7 +104,7 @@ export function useLocalStorage<TValue = string>(
     };
   }, [key, defaultValue, onLocalStorageChange]);
 
-  const writeState = useCallback((value: TValue) => writeStorage(key, value), [key]);
+  const writeState = useCallback((value: LocalStorageSetStateValue<TValue>) => value instanceof Function ? writeStorage(key, value(localState)) : writeStorage(key, value), [key]);
   const deleteState = useCallback(() => deleteFromStorage(key), [key]);
   const state: TValue | null = localState ?? defaultValue;
 
