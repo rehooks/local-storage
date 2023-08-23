@@ -17,6 +17,9 @@
     "type": "git",
     "url": "https://github.com/rehooks/local-storage.git"
   },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "author": "Amit Solanki <amit.fash@gmail.com>",
   "contributors": [
     "Joseph Harrison-Lim"
