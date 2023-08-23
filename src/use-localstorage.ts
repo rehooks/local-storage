@@ -106,7 +106,7 @@ export function useLocalStorage<TValue = string>(
 
   const writeState = useCallback((value: LocalStorageSetStateValue<TValue>) => value instanceof Function ? writeStorage(key, value(localState)) : writeStorage(key, value), [key]);
   const deleteState = useCallback(() => deleteFromStorage(key), [key]);
-  const state: TValue | null = localState ?? defaultValue;
+  const state: TValue | null = tryParse(localState ?? defaultValue);
 
   return [state, writeState, deleteState];
 }
